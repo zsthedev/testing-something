@@ -1,0 +1,28 @@
+@import "../../app.scss";
+
+
+.q-students{
+    h2{
+        margin-bottom: 30px;
+        color: $dark-color;
+    }
+
+    .q-students-row{
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+
+        #qstudent{
+            width: 100%;
+            height: 100px;
+            padding: 0 50px;
+            background-color: white;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-radius: 5px;
+            box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+            
+        }
+    }
+}

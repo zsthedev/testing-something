@@ -1,0 +1,30 @@
+@import "../../../app.scss";
+
+
+.about{
+
+    .row{
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        height: 100%;
+
+        .col:nth-child(1){
+            width: 100%;
+            height: 100%;
+            flex-basis: 50%;
+            @include flexCenter();
+
+            img{
+                width: 80%;
+                height: 80%;
+            }
+        }
+
+        .col:nth-child(2){
+            flex-basis: 40%;
+
+        }
+    }
+
+}

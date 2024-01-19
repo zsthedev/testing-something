@@ -1,0 +1,21 @@
+@import "../../../app.scss";
+
+
+.company-assets{
+    
+    h2{
+        margin-bottom: 30px;
+        color: $dark-color;
+    }
+
+    .company-assets-row{
+        display: flex;
+        justify-content: space-between;
+
+        #attendance{
+            height: 250px;
+
+        }
+    }
+
+}

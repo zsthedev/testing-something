@@ -1,0 +1,56 @@
+@import "../../../app.scss";
+
+.schedule-section{
+    > .row {
+        position: relative;
+        .col{
+            flex-basis: 15%;
+            z-index: 1;
+        }
+        .col1{
+            flex-basis: 65%;
+            z-index: 1;
+
+            h2{
+                color: $dark-color;
+                font-size: 1.3vw;
+            }
+            .col1-row{
+                margin-top: 20px;
+                width: 100%;
+                height: auto;
+                display: flex;
+                flex-direction: column;
+                gap: 15px;
+                margin-bottom: 30px;
+
+                
+
+            }
+        }
+        >.col2{
+            width: 20%;
+            flex-basis: 20%;
+            background-color: $transparent-accent-color;
+            min-height: 100vh;
+            padding: 50px;
+            position: fixed;
+            z-index: 2;
+            right: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            >div{
+                width: 100%;
+
+
+             
+                
+            }
+            
+        }
+    }
+}
+
+

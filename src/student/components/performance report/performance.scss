@@ -1,0 +1,50 @@
+@import "../../../app.scss";
+
+table{
+    width: 100%;
+    height: auto;
+    background-color: white;
+    padding: 1.5vw;
+    border-radius: 0.3vw;
+    box-shadow: rgba(149, 157, 165, 0.116) 0px 8px 24px;
+   thead{
+    margin-bottom: 10px;
+   }
+
+    tr{
+        text-align: left;
+        width: 100%;
+        margin-bottom: 20px;
+        
+
+        
+    }
+    #performance{
+        th{
+            width: 25%;
+        }
+    }
+
+    #fee{
+        th{
+            width: 20%;
+        }
+    }
+
+   
+
+    th{
+        font-weight: 600;
+        color: $dark-color;
+        padding: 10px 0;
+    }
+
+    td{
+       
+        color: $dark-color;
+        padding: 5px 0;
+    }
+
+
+
+}

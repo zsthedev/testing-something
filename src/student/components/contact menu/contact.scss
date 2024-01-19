@@ -1,0 +1,22 @@
+@import "../../../app.scss";
+
+
+.contact{
+    h2{
+        color: $dark-color;
+        font-size: 1.5vw;
+    }
+    form{
+        margin-top: 20px;
+    }
+    textarea{
+        background-color: white;
+    }
+    
+    button{
+        @include primaryBtn();
+        background-color: $accent-color;
+        color: white;
+        margin-top: 5px;
+    }
+}

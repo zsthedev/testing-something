@@ -1,0 +1,21 @@
+@import "../../../app.scss";
+
+
+.income-record{
+    h2{
+        color: $dark-color;
+        margin-bottom: 30px;
+    }
+
+    .income-record-row{
+        display: flex;
+        justify-content: space-between;
+        align-items: centere;
+
+        > #attendance{
+            height: 250px;
+        }
+
+
+    }
+}
