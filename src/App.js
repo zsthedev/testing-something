@@ -41,6 +41,7 @@ import { loadUser } from "./redux/actions/user";
 import { ProtectedRoute } from "protected-route-react";
 import { getAllInvoices, getAllStudents } from "./redux/actions/finance";
 import { getAllCourses } from "./redux/actions/course";
+import Error404 from "./landing/components/Error404";
 
 function App() {
   const { isAuthenticated, user, message, error, loading } = useSelector(
@@ -72,6 +73,7 @@ function App() {
       {/* <Navbar isAuthenticated={isAuthenticated} user={user} /> */}
       <Routes>
         <Route path="/" element={<Hero></Hero>}></Route>
+        <Route path="*" element={<Error404></Error404>}></Route>
         <Route path="/about" element={<About></About>}></Route>
         <Route path="/contact" element={<Contact></Contact>}></Route>
         <Route
