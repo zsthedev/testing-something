@@ -92,7 +92,7 @@ function App() {
                   ? "/hr"
                   : user?.role === "qc"
                   ? "/qc"
-                  : "/"
+                  : "/login"
               }`}
             >
               <Login></Login>
