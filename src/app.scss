@@ -110,3 +110,43 @@ form {
 
 .error-section {
 }
+.img-row {
+  display: flex;
+  align-items: flex-start;
+}
+.dropdown {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+
+  > ul {
+    top: 70px;
+    background-color: white;
+    color: $dark-color;
+    width: 100px;
+    min-height: 100px;
+    border-radius: 5px;
+    position: absolute;
+    box-shadow: rgba(149, 157, 165, 0.11) 0px 8px 24px;
+
+    li {
+      padding: 10px;
+      width: 100%;
+      text-align: center;
+      cursor: pointer;
+      font-weight: 500;
+    }
+
+    li:hover {
+      color: $accent-color;
+      font-weight: 600;
+      transition: 0.3s ease-in;
+    }
+  }
+}
+
+#pr-image {
+  cursor: pointer;
+}

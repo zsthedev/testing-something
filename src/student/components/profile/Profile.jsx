@@ -3,6 +3,8 @@ import { Link } from "react-router-dom";
 import "./profile.scss";
 import logo from "../../../assets/logo.png";
 import placeholder from "../../../assets/placeholder.jpg";
+import { useDispatch } from "react-redux";
+import { logout } from "../../../redux/actions/user";
 const Profile = ({ isAuthenticated, user }) => {
   const [image, setImage] = useState(user.avatar.url);
   const [name, setName] = useState(user.name);
@@ -19,6 +21,13 @@ const Profile = ({ isAuthenticated, user }) => {
   const [status, setStatus] = useState("");
 
   const role = (isAuthenticated = true ? user.role : "");
+  const dispatch = useDispatch();
+  const clickHandler = (e) => {
+    e.preventDefault();
+    dispatch(logout());
+  };
+
+  const [visible, setVisible] = useState("");
 
   return (
     <section className="profile">
@@ -86,9 +95,16 @@ const Profile = ({ isAuthenticated, user }) => {
         <div className="col1">
           <div className="col1-content">
             <div className="pr-image-row">
-              <div>
-                Hi, {name}
-                <img src={image == "" ? placeholder : image} alt="" />
+              <div className="dropdown">
+                <img
+                  id="pr-image"
+                  src={image == "" ? placeholder : image}
+                  alt=""
+                  onClick={() => setVisible(!visible)}
+                />
+                <ul className={visible ? "show" : "hide"}>
+                  <li onClick={clickHandler}>Logout</li>
+                </ul>
               </div>
             </div>
             <div className="profile-details">

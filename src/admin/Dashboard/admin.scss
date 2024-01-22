@@ -22,7 +22,7 @@
                 margin-bottom: 50px;
             }
 
-            .dropdown {
+            .admin-dropdown {
                 width: 100%;
 
                 text-align: left;
@@ -78,6 +78,18 @@
             width: 84%;
             height: 100%;
             background-color: $light-color;
+            padding: 50px;
         }
+    }
+}
+
+.pr-image-row {
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+    img {
+        width: 60px;
+        height: 60px;
+        border-radius: 100%;
     }
 }

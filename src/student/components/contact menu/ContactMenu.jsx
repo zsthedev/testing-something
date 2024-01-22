@@ -10,7 +10,7 @@ const ContactMenu = ({ isAuthenticated, user }) => {
     { value: "finance", label: "Finance" },
   ];
 
-  const role = "student";
+  const role = user.role;
 
   const [to, setTo] = useState("");
   const [message, setMessage] = useState("");
@@ -58,6 +58,7 @@ const ContactMenu = ({ isAuthenticated, user }) => {
 
             <li>
               <Link
+                className="active"
                 to={role === "teacher" ? "/contactmenu" : "/student/feerecord"}
               >
                 {role === "teacher" ? "Complaint Records" : "Fee Record"}
@@ -66,7 +67,6 @@ const ContactMenu = ({ isAuthenticated, user }) => {
 
             <li>
               <Link
-                className="active"
                 to={
                   role === "teacher" ? "/teacher/performance" : "/contactmenu"
                 }

@@ -5,14 +5,20 @@ import logo from "../../assets/logo.png";
 import Attendance from "../../../student/components/attendance history/Attendance";
 import Invoice from "./Invoice";
 import "./invoice.scss";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { logout } from "../../../redux/actions/user";
 
 const SendInvoice = () => {
   const [image, setImage] = useState("");
   const [name, setName] = useState("");
 
   const [status, setStatus] = useState("");
-
+  const [visible, setVisible] = useState("");
+  const dispatch = useDispatch();
+  const clickHandler = (e) => {
+    e.preventDefault();
+    dispatch(logout());
+  };
   const invoices = useSelector((state) => state.finance.invoices.invoices);
 
   return (
@@ -50,9 +56,16 @@ const SendInvoice = () => {
         <div className="col1">
           <div className="col1-content">
             <div className="pr-image-row">
-              <div>
-                Hi, {name}
-                <img src={image == "" ? placeholder : image} alt="" />
+              <div className="dropdown">
+                <img
+                  id="pr-image"
+                  src={image == "" ? placeholder : image}
+                  alt=""
+                  onClick={() => setVisible(!visible)}
+                />
+                <ul className={visible ? "show" : "hide"}>
+                  <li onClick={clickHandler}>Logout</li>
+                </ul>
               </div>
             </div>
 

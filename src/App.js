@@ -453,11 +453,15 @@ function App() {
           path="/admin"
           element={
             <ProtectedRoute
-              isAdmin={isAuthenticated && user.role === "admin"}
+              isAuthenticated={isAuthenticated}
+              isAdmin={user && user.role === "admin"}
               adminRoute={true}
-              redirectAdmin="/profile"
+              redirectAdmin="/login"
             >
-              <AdminDashboard></AdminDashboard>
+              <AdminDashboard
+                isAuthenticated={isAuthenticated}
+                user={user}
+              ></AdminDashboard>
             </ProtectedRoute>
           }
         ></Route>

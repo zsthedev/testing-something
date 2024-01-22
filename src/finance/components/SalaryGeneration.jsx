@@ -6,6 +6,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { getAllInvoices, getAllStudents } from "../../redux/actions/finance";
 import { getAllCourses } from "../../redux/actions/course";
 import Loader from "../../Loader";
+import { logout } from "../../redux/actions/user";
 
 const SalaryGeneration = () => {
   const dispatch = useDispatch();
@@ -18,6 +19,12 @@ const SalaryGeneration = () => {
   const role = "teacher";
 
   const { loading, message, error } = useSelector((state) => state.finance);
+  const [visible, setVisible] = useState(false);
+
+  const clickHandler = (e) => {
+    e.preventDefault();
+    dispatch(logout());
+  };
 
   useEffect(() => {
     dispatch(getAllStudents());
@@ -63,8 +70,17 @@ const SalaryGeneration = () => {
           <div className="col1-content">
             <div className="pr-image-row">
               <div>
-                Hi, {name}
-                <img src={image == "" ? placeholder : image} alt="" />
+                <div className="dropdown">
+                  <img
+                    id="pr-image"
+                    src={image == "" ? placeholder : image}
+                    alt=""
+                    onClick={() => setVisible(!visible)}
+                  />
+                  <ul className={visible ? "show" : "hide"}>
+                    <li onClick={clickHandler}>Logout</li>
+                  </ul>
+                </div>
               </div>
             </div>
           </div>

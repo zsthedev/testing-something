@@ -1,10 +1,9 @@
 @import "../../../app.scss";
 
-
-.login{
+.login {
     background-color: $accent-color;
 
-    .row{
+    .row {
         margin: 50px auto;
         width: 40%;
         background-color: white;
@@ -12,11 +11,11 @@
         padding: 50px;
         border-radius: 5px;
 
-        >form{
+        > form {
             width: 100%;
+            position: relative;
 
-
-            a{
+            a {
                 text-align: center;
                 color: $accent-color;
             }
@@ -24,20 +23,51 @@
     }
 }
 
-form > div{
+form > div {
     display: flex;
     gap: 10px;
     flex-direction: column;
 }
 
-.show{
+.show {
     display: flex;
 }
 
-.hide{
+.hide {
     display: none;
 }
-label{
+label {
     font-size: 14px;
     font-weight: 600;
+}
+
+.pass-icon {
+    position: absolute;
+    right: 15px;
+    top: 130px;
+    cursor: pointer;
+    color: $dark-color;
+}
+
+@media screen and (max-width: 768px) {
+    .login {
+        padding: 30px;
+        .row {
+            margin: 50px auto;
+            width: 100%;
+            background-color: white;
+            @include flexCenter();
+            padding: 25px;
+            border-radius: 5px;
+
+            > form {
+                width: 100%;
+
+                a {
+                    text-align: center;
+                    color: $accent-color;
+                }
+            }
+        }
+    }
 }

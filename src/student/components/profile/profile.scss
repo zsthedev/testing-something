@@ -1,20 +1,26 @@
 @import "../../../app.scss";
 
-.profile{
+.profile {
     width: 100%;
     height: 100vh;
     padding: 0;
 
+    .logout-btn {
+        @include primaryBtn();
+        background-color: $accent-color;
+        color: white;
+        padding: 10px;
+        width: 120px;
+    }
 
-    .row{
+    .row {
         width: 100%;
         min-height: 100vh;
         display: flex;
         align-items: center;
         position: relative;
 
-
-        .col{
+        .col {
             flex-basis: 15%;
             min-height: 100vh;
             padding: 50px;
@@ -22,128 +28,265 @@
             display: flex;
             flex-direction: column;
 
-            
-            
-            img{
+            img {
                 width: 80px;
                 margin-bottom: 50px;
             }
 
-            ul{
+            ul {
                 display: flex;
                 flex-direction: column;
                 gap: 20px;
 
-                
-                li{
-                    .active{
+                li {
+                    .active {
                         color: $accent-color;
                         font-weight: 600;
                     }
-                    a{
+                    a {
                         color: $dark-color;
                         font-size: 16px;
-
                     }
                 }
             }
         }
 
-       .col1{
-        width: 100%;
-        min-height: 100vh;
-        flex-basis: 85%;
-        padding: 50px;
-        
-        background-color: $light-color;
-        
-        
-
-        .col1-content{
-
+        .col1 {
             width: 100%;
-            .pr-image-row{
+            min-height: 100vh;
+            flex-basis: 85%;
+            padding: 50px;
+
+            background-color: $light-color;
+
+            .col1-content {
                 width: 100%;
-                display: flex;
-                justify-content: flex-end;
-
-                div{
+                .pr-image-row {
+                    width: 100%;
                     display: flex;
-                    align-items: center;
-                    gap: 10px;
-                    img{
-                        width: 60px;
-                        height: 60px;
-                        background-color: $accent-color;
-                        border-radius: 100%;
-                        @include flexCenter();
+                    justify-content: flex-end;
 
+                    div {
+                        display: flex;
+                        align-items: center;
+                        gap: 10px;
+                        img {
+                            width: 60px;
+                            height: 60px;
+                            background-color: $accent-color;
+                            border-radius: 100%;
+                            @include flexCenter();
+                        }
                     }
                 }
 
-            }
-
-            .profile-details{
-                width: 100%;
-
-                img{
-                    width: 120px;
-                    height: 120px;
-                    background-color: $transparent-accent-color;
-                    margin-bottom: 30px;
-                    border-radius: 100%;
-                }
-
-                form{
+                .profile-details {
                     width: 100%;
-                    display: flex;
-                    flex-direction: column;
-                    justify-content: space-between;
-                    
-                   
 
-                    .form-data{
+                    img {
+                        width: 120px;
+                        height: 120px;
+                        background-color: $transparent-accent-color;
+                        margin-bottom: 30px;
+                        border-radius: 100%;
+                    }
+
+                    form {
+                        width: 100%;
                         display: flex;
-                        flex-direction: row;
+                        flex-direction: column;
                         justify-content: space-between;
 
-                        width: 100%;
-                        div{
-                            
-                            flex-basis: 49%;
+                        .form-data {
                             display: flex;
-                            flex-direction: column;
+                            flex-direction: row;
+                            justify-content: space-between;
+
+                            width: 100%;
+                            div {
+                                flex-basis: 49%;
+                                display: flex;
+                                flex-direction: column;
+                                gap: 10px;
+
+                                input {
+                                    background-color: white;
+                                }
+                            }
+                        }
+
+                        .btn-row {
+                            margin: 10px 0;
+                            display: flex;
+                            flex-direction: row;
+
+                            button:nth-child(1) {
+                                @include primaryBtn();
+                                background-color: $accent-color;
+                                color: white;
+                            }
+
+                            button:nth-child(2) {
+                                @include primaryBtn();
+                                background-color: $dark-color;
+                                color: white;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .profile {
+        .logout-btn {
+            @include primaryBtn();
+            background-color: $accent-color;
+            color: white;
+            padding: 10px;
+            width: 120px;
+            background-color: none;
+        }
+
+        .row {
+            width: 100%;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            position: relative;
+            flex-direction: column;
+
+            .col {
+                margin-top: 600px;
+                flex-basis: 15%;
+                min-height: auto;
+                padding: 25px;
+
+                display: flex;
+
+                img {
+                    width: 100px;
+
+                    margin: 50px auto;
+                }
+
+                ul {
+                    display: flex;
+                    flex-direction: row;
+                    flex-wrap: wrap;
+                    gap: 20px;
+                    justify-content: center;
+                    align-items: center;
+
+                    li {
+                        width: 120px;
+                        height: 100px;
+                        background-color: $light-color;
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
+                        text-align: center;
+                        border-radius: 5px;
+                        padding: 5px;
+                        .active {
+                            color: $accent-color;
+                            font-weight: 600;
+                        }
+                        a {
+                            color: $dark-color;
+                            font-size: 4vw;
+                        }
+                    }
+                }
+            }
+
+            .col1 {
+                width: 100%;
+                min-height: 100vh;
+                flex-basis: 85%;
+                padding: 50px;
+
+                background-color: $light-color;
+
+                .col1-content {
+                    width: 100%;
+                    .pr-image-row {
+                        width: 100%;
+                        display: flex;
+                        justify-content: flex-end;
+
+                        div {
+                            display: flex;
+                            align-items: center;
                             gap: 10px;
-    
-                            input{
-                                background-color: white;
+                            img {
+                                width: 60px;
+                                height: 60px;
+                                background-color: $accent-color;
+                                border-radius: 100%;
+                                @include flexCenter();
                             }
                         }
                     }
 
-                    .btn-row{
-                        margin: 10px 0;
-                       display: flex;
-                       flex-direction: row;
+                    .profile-details {
+                        width: 100%;
 
-                        button:nth-child(1){
-                            @include  primaryBtn();
-                            background-color: $accent-color;
-                            color: white;
-                            
+                        img {
+                            width: 120px;
+                            height: 120px;
+                            background-color: $transparent-accent-color;
+                            margin-bottom: 30px;
+                            border-radius: 100%;
                         }
 
-                        button:nth-child(2){
-                            @include  primaryBtn();
-                            background-color: $dark-color;
-                            color: white;
+                        form {
+                            width: 100%;
+                            display: flex;
+                            flex-direction: column;
+                            justify-content: space-between;
+
+                            .form-data {
+                                display: flex;
+                                flex-direction: row;
+                                justify-content: space-between;
+
+                                width: 100%;
+                                div {
+                                    flex-basis: 49%;
+                                    display: flex;
+                                    flex-direction: column;
+                                    gap: 10px;
+
+                                    input {
+                                        background-color: white;
+                                    }
+                                }
+                            }
+
+                            .btn-row {
+                                margin: 10px 0;
+                                display: flex;
+                                flex-direction: row;
+
+                                button:nth-child(1) {
+                                    @include primaryBtn();
+                                    background-color: $accent-color;
+                                    color: white;
+                                }
+
+                                button:nth-child(2) {
+                                    @include primaryBtn();
+                                    background-color: $dark-color;
+                                    color: white;
+                                }
+                            }
                         }
-                                                   
                     }
                 }
             }
-
         }
-       }
     }
 }

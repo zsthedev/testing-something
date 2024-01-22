@@ -5,9 +5,9 @@ import "./navbar.scss";
 
 const Navbar = ({ isAuthenticated, user }) => {
   return (
-    <nav className={isAuthenticated ? "hide" : ""}>
-      <img src={logo} className="logo" alt="" />
-      <ul>
+    <nav className={!isAuthenticated ? "hide" : ""}>
+      <img src={logo} className={isAuthenticated ? "hide" : "logo"} alt="" />
+      <ul className="">
         <li>
           <Link to="">Home</Link>
         </li>
