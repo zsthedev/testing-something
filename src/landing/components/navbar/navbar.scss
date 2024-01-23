@@ -3,23 +3,78 @@
 nav {
   width: 100%;
   display: flex;
-  justify-content: flex-end;
-  padding: 30px 50px;
+  justify-content: space-between;
+  padding: 12px 50px;
   align-items: center;
-  background-color: transparent;
+  background-color: white;
   top: 0;
   left: 0;
+  position: fixed;
+  z-index: 10;
+  box-shadow: rgba(149, 157, 165, 0.082) 0px 8px 24px;
 
   .logo {
-    width: 100px;
+    width: 80px;
   }
   ul {
     display: flex;
-    gap: 5vw;
+    gap: 3.5vw;
+    align-items: center;
 
     li > a {
       color: $dark-color;
       font-weight: 450;
+      font-size: 0.8vw;
+    }
+
+    li > a:hover {
+      transition: 0.3s ease-in;
+      color: $accent-color;
+      font-weight: 600;
     }
   }
+}
+
+.logo-row {
+  display: flex;
+  align-items: center;
+  gap: 1vw;
+
+  > p {
+    font-size: 1vw;
+    font-weight: 600;
+  }
+}
+.dropdown > img {
+  width: 60px;
+  height: 60px;
+  border-radius: 100%;
+
+  border: 2px solid $accent-color;
+}
+
+.dropdown > ul {
+  width: 200px;
+  display: flex;
+  gap: 2px;
+  flex-direction: column;
+  padding: 10px;
+  text-align: left;
+  display: none;
+}
+
+.dropdown > .show {
+  display: flex;
+}
+
+.dropdown > ul > hr {
+  background-color: rgba(0, 0, 0, 0.356);
+  width: 100%;
+}
+.hide {
+  display: none;
+}
+
+.show {
+  display: flex;
 }

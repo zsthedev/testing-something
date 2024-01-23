@@ -22,40 +22,8 @@ const QTeachers = () => {
   return (
     <section className="profile">
       <div className="row">
-        <div className="col">
-          <img src={logo} alt="" />
-          <ul>
-            <li>
-              <Link to="/qc">Students</Link>
-            </li>
-
-            <li>
-              <Link to="/qc/teachers" className="active">
-                Teachers
-              </Link>
-            </li>
-
-            <li>
-              <Link to="/qc/issuecertificates">Issue Certificate</Link>
-            </li>
-          </ul>
-        </div>
         <div className="col1">
           <div className="col1-content">
-            <div className="pr-image-row">
-              <div className="dropdown">
-                <img
-                  id="pr-image"
-                  src={image == "" ? placeholder : image}
-                  alt=""
-                  onClick={() => setVisible(!visible)}
-                />
-                <ul className={visible ? "show" : "hide"}>
-                  <li onClick={clickHandler}>Logout</li>
-                </ul>
-              </div>
-            </div>
-
             <div className="q-students">
               <h2>Teachers</h2>
               <div className="q-students-row">

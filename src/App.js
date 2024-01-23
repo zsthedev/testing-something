@@ -70,7 +70,7 @@ function App() {
     <Loader />
   ) : (
     <Router>
-      {/* <Navbar isAuthenticated={isAuthenticated} user={user} /> */}
+      <Navbar isAuthenticated={isAuthenticated} user={user} />
       <Routes>
         <Route path="/" element={<Hero></Hero>}></Route>
         <Route path="*" element={<Error404></Error404>}></Route>
@@ -130,23 +130,34 @@ function App() {
             </ProtectedRoute>
           }
         ></Route>
+
         <Route
           path="/classchedule"
           element={
-            <ClassSchedule
+            <ProtectedRoute
               isAuthenticated={isAuthenticated}
-              user={user}
-            ></ClassSchedule>
+              redirect="/profile"
+            >
+              <ClassSchedule
+                isAuthenticated={isAuthenticated}
+                user={user}
+              ></ClassSchedule>
+            </ProtectedRoute>
           }
         ></Route>
 
         <Route
           path="/attendancehistory"
           element={
-            <AttendanceHistory
+            <ProtectedRoute
               isAuthenticated={isAuthenticated}
-              user={user}
-            ></AttendanceHistory>
+              redirect="/profile"
+            >
+              <AttendanceHistory
+                isAuthenticated={isAuthenticated}
+                user={user}
+              ></AttendanceHistory>
+            </ProtectedRoute>
           }
         ></Route>
 
@@ -201,7 +212,7 @@ function App() {
         {/* Teacher Routes */}
 
         <Route
-          path="teacher/salaryrecord"
+          path="t/salaryrecords"
           element={
             <ProtectedRoute
               isAuthenticated={isAuthenticated && user.role === "teacher"}
@@ -216,11 +227,11 @@ function App() {
         ></Route>
 
         <Route
-          path="teacher/students"
+          path="t/students"
           element={
             <ProtectedRoute
               isAuthenticated={isAuthenticated && user.role === "teacher"}
-              redirect="/redirect"
+              redirect="/profile"
             >
               <Students
                 isAuthenticated={isAuthenticated}
@@ -230,7 +241,7 @@ function App() {
           }
         ></Route>
         <Route
-          path="teacher/performance"
+          path="t/performance"
           element={
             <ProtectedRoute
               isAuthenticated={isAuthenticated && user.role === "teacher"}
@@ -252,7 +263,7 @@ function App() {
           element={
             <ProtectedRoute
               isAuthenticated={isAuthenticated && user.role === "finance"}
-              redirect="/profile"
+              redirect="/login"
             >
               <SalaryGeneration
                 isAuthenticated={isAuthenticated}
@@ -456,7 +467,7 @@ function App() {
               isAuthenticated={isAuthenticated}
               isAdmin={user && user.role === "admin"}
               adminRoute={true}
-              redirectAdmin="/login"
+              redirectAdmin="/profile"
             >
               <AdminDashboard
                 isAuthenticated={isAuthenticated}

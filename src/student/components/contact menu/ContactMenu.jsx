@@ -17,65 +17,6 @@ const ContactMenu = ({ isAuthenticated, user }) => {
   return (
     <section className="profile">
       <div className="row">
-        <div className="col">
-          <img src={logo} alt="" />
-          <ul>
-            <li>
-              <Link to="/profile">Profile</Link>
-            </li>
-
-            <li>
-              <Link to="/classchedule">Class Schedule</Link>
-            </li>
-
-            <li>
-              <Link to="/attendancehistory">Attendance History</Link>
-            </li>
-
-            <li>
-              <Link
-                to={
-                  role == "teacher"
-                    ? "/teacher/salaryrecord"
-                    : "/student/examhistory"
-                }
-              >
-                {role == "teacher" ? "Salary Record" : "Exam Histor"}
-              </Link>
-            </li>
-
-            <li>
-              <Link
-                to={
-                  role === "teacher"
-                    ? "/teacher/students"
-                    : "/student/performancereport"
-                }
-              >
-                {role === "teacher" ? "Students" : "Exam History"}
-              </Link>
-            </li>
-
-            <li>
-              <Link
-                className="active"
-                to={role === "teacher" ? "/contactmenu" : "/student/feerecord"}
-              >
-                {role === "teacher" ? "Complaint Records" : "Fee Record"}
-              </Link>
-            </li>
-
-            <li>
-              <Link
-                to={
-                  role === "teacher" ? "/teacher/performance" : "/contactmenu"
-                }
-              >
-                {role === "teacher" ? "Teacher Performance" : "Contact Menu"}
-              </Link>
-            </li>
-          </ul>
-        </div>
         <div className="col1 contact">
           <h2>Contact Menu</h2>
 

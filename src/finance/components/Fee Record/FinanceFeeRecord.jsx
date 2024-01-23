@@ -23,50 +23,8 @@ const FinanceFeeRecord = () => {
   return (
     <section className="profile">
       <div className="row">
-        <div className="col">
-          <img src={logo} alt="" />
-          <ul>
-            <li>
-              <Link to="/finance">Salary Generation</Link>
-            </li>
-
-            <li>
-              <Link to="/f/feerecord" className="active">
-                Fee Record
-              </Link>
-            </li>
-
-            <li>
-              <Link to="/f/incomerecord">Income Record</Link>
-            </li>
-
-            <li>
-              <Link to="/f/expenserecord">Expense Record</Link>
-            </li>
-            <li>
-              <Link to="/f/companyassets">Company Assets</Link>
-            </li>
-            <li>
-              <Link to="/f/invoices">Invoices</Link>
-            </li>
-          </ul>
-        </div>
         <div className="col1">
           <div className="col1-content">
-            <div className="pr-image-row">
-              <div className="dropdown">
-                <img
-                  id="pr-image"
-                  src={image == "" ? placeholder : image}
-                  alt=""
-                  onClick={() => setVisible(!visible)}
-                />
-                <ul className={visible ? "show" : "hide"}>
-                  <li onClick={clickHandler}>Logout</li>
-                </ul>
-              </div>
-            </div>
-
             <div className="fee-r-row">
               <h2>Fee Record</h2>
               <Fee></Fee>

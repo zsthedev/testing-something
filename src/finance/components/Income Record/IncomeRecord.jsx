@@ -22,51 +22,8 @@ const IncomeRecord = () => {
   return (
     <section className="profile">
       <div className="row">
-        <div className="col">
-          <img src={logo} alt="" />
-          <ul>
-            <li>
-              <Link to="/finance">Salary Generation</Link>
-            </li>
-
-            <li>
-              <Link to="/f/feerecord">Fee Record</Link>
-            </li>
-
-            <li>
-              <Link to="/f/incomerecord" className="active">
-                Income Record
-              </Link>
-            </li>
-
-            <li>
-              <Link to="/f/expenserecord">Expense Record</Link>
-            </li>
-            <li>
-              <Link to="/f/companyassets">Company Assets</Link>
-            </li>
-
-            <li>
-              <Link to="/f/invoices">Invoices</Link>
-            </li>
-          </ul>
-        </div>
         <div className="col1">
           <div className="col1-content">
-            <div className="pr-image-row">
-              <div className="dropdown">
-                <img
-                  id="pr-image"
-                  src={image == "" ? placeholder : image}
-                  alt=""
-                  onClick={() => setVisible(!visible)}
-                />
-                <ul className={visible ? "show" : "hide"}>
-                  <li onClick={clickHandler}>Logout</li>
-                </ul>
-              </div>
-            </div>
-
             <div className="income-record">
               <h2>Income Record</h2>
               <div className="income-record-row">
