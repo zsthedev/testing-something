@@ -42,6 +42,9 @@ import { ProtectedRoute } from "protected-route-react";
 import { getAllInvoices, getAllStudents } from "./redux/actions/finance";
 import { getAllCourses } from "./redux/actions/course";
 import Error404 from "./landing/components/Error404";
+import Sidebar from "./admin/Sidebar/Sidebar";
+import Class from "./admin/Class/Class";
+import CreateClass from "./admin/Class/CreateClass";
 
 function App() {
   const { isAuthenticated, user, message, error, loading } = useSelector(
@@ -66,6 +69,13 @@ function App() {
     dispatch(loadUser());
   }, [dispatch]);
 
+  const adminSidebarItems = [
+    {
+      value: [{ link: "/admin/classes", title: "Classes" }],
+      label: "Students",
+    },
+  ];
+
   return loading ? (
     <Loader />
   ) : (
@@ -83,7 +93,7 @@ function App() {
               isAuthenticated={!isAuthenticated}
               redirect={`${
                 user?.role === "student"
-                  ? "/profile"
+                  ? "/classchedule"
                   : user?.role === "teacher"
                   ? "/profile"
                   : user?.role === "finance"
@@ -102,6 +112,7 @@ function App() {
           }
         ></Route>
         <Route path="/signup" element={<Register></Register>}></Route>
+
         <Route
           path="/contactmenu"
           element={
@@ -469,10 +480,41 @@ function App() {
               adminRoute={true}
               redirectAdmin="/profile"
             >
-              <AdminDashboard
-                isAuthenticated={isAuthenticated}
-                user={user}
-              ></AdminDashboard>
+              <Sidebar
+                items={adminSidebarItems}
+                component={AdminDashboard}
+              ></Sidebar>
+            </ProtectedRoute>
+          }
+        ></Route>
+
+        <Route
+          path="/admin/classes"
+          element={
+            <ProtectedRoute
+              isAuthenticated={isAuthenticated}
+              isAdmin={user && user.role === "admin"}
+              adminRoute={true}
+              redirectAdmin="/profile"
+            >
+              <Sidebar items={adminSidebarItems} component={Class}></Sidebar>
+            </ProtectedRoute>
+          }
+        ></Route>
+
+        <Route
+          path="/admin/classes/create"
+          element={
+            <ProtectedRoute
+              isAuthenticated={isAuthenticated}
+              isAdmin={user && user.role === "admin"}
+              adminRoute={true}
+              redirectAdmin="/profile"
+            >
+              <Sidebar
+                items={adminSidebarItems}
+                component={CreateClass}
+              ></Sidebar>
             </ProtectedRoute>
           }
         ></Route>

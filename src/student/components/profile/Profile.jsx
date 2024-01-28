@@ -30,7 +30,7 @@ const Profile = ({ isAuthenticated, user }) => {
   const [visible, setVisible] = useState("");
 
   return (
-    <section className="profile">
+    <section className="profile" id="profile-section">
       <div className="row">
         <div className="col1">
           <div className="col1-content">

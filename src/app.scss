@@ -15,10 +15,6 @@ $light-color: #f8f5f5;
   font-family: "Poppins";
 }
 
-::-webkit-scrollbar {
-  display: none;
-}
-
 @mixin flexCenter() {
   display: flex;
   justify-content: center;

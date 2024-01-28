@@ -1,0 +1,103 @@
+@import "../../app.scss";
+
+#admin-sidebar {
+    width: 100%;
+    min-height: 100vh;
+    padding: 0;
+
+    > .row {
+        width: 100%;
+        min-height: 100vh;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        position: relative;
+
+        > .col {
+            flex-basis: 15%;
+            height: 100vh;
+            background-color: white;
+
+            padding: 50px 30px;
+
+            position: fixed;
+            left: 0;
+            top: 0;
+            width: 15%;
+
+            .admin-dropdown {
+                width: 100%;
+
+                text-align: left;
+                margin-bottom: 15px;
+
+                > button {
+                    background-color: transparent;
+                    border: none;
+                    outline: none;
+                    cursor: pointer;
+                    text-align: left;
+                    font-size: 18px;
+                }
+
+                > .active {
+                    background-color: $accent-color;
+                    width: 100%;
+                    padding: 10px;
+                    color: white;
+                    border-radius: 5px;
+                }
+
+                > .content {
+                    margin-top: 5px;
+                    padding: 10px;
+                    display: none;
+                    flex-direction: column;
+                    gap: 5px;
+
+                    > a {
+                        color: $dark-color;
+                        font-size: 16px;
+                        font-weight: 400;
+                    }
+
+                    > a:hover {
+                        transition: 0.1s ease-in;
+                        background-color: #047f6a42;
+                        padding: 8px;
+                        border-radius: 3px;
+                        font-weight: 600;
+                    }
+                }
+
+                > .show {
+                    transition: 0.3s ease-in;
+                    display: flex;
+                }
+            }
+
+            #header {
+                margin-bottom: 50px;
+                display: flex;
+                gap: 10px;
+                align-items: center;
+
+                img {
+                    width: 80px;
+                }
+
+                > p {
+                    font-size: 20px;
+                    font-weight: 600;
+                }
+            }
+        }
+        > .col1 {
+            margin-left: 15%;
+
+            flex-basis: 85%;
+            min-height: 100vh;
+            background-color: rgb(231, 231, 231);
+        }
+    }
+}

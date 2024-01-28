@@ -50,12 +50,10 @@ const Navbar = ({ isAuthenticated, user }) => {
       >
         <div className="logo-row">
           <img src={logo} className="logo" alt="" />
-          <p>Student Management</p>
+          <p>My Learning Portal</p>
         </div>
         <ul className="">
-          <li>
-            <Link to="/profile">Profile</Link>
-          </li>
+          <li>{/* <Link to="/profile">Profile</Link> */}</li>
 
           <li>
             <Link to="/classchedule">Class Schedule</Link>
