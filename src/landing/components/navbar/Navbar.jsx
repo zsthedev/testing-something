@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import logo from "../../assets/logo.png";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import "./navbar.scss";
 import placeholder from "../../../assets/placeholder.jpg";
 import { logout } from "../../../redux/actions/user";
@@ -10,6 +10,10 @@ const Navbar = ({ isAuthenticated, user }) => {
   const [visible, setVisible] = useState(false);
   const [fVisible, setfVisible] = useState(false);
   const [tVisible, settVisible] = useState(false);
+
+  const pathname = useLocation().pathname;
+
+  console.log(pathname);
 
   const image = user && user.avatar.url;
 
@@ -45,7 +49,11 @@ const Navbar = ({ isAuthenticated, user }) => {
       {/* Student Navigation */}
       <nav
         className={
-          isAuthenticated === true && user.role === "student" ? "show" : "hide"
+          isAuthenticated === true &&
+          user.role === "student" &&
+          pathname != "/room/locus"
+            ? "show"
+            : "hide"
         }
       >
         <div className="logo-row">
