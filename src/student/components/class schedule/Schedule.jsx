@@ -15,7 +15,7 @@ const Schedule = (props) => {
 
       <h4>{props.course_name || "Course Name"}</h4>
 
-      <Link path="">
+      <Link to={"/room/locus"}>
         <FaArrowRight />
       </Link>
     </div>

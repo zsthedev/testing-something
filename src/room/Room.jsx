@@ -1,37 +1,44 @@
-import React, { useEffect, useRef } from "react";
+import React from "react";
 import { useParams } from "react-router-dom";
 import { ZegoUIKitPrebuilt } from "@zegocloud/zego-uikit-prebuilt";
-import "./room.scss";
+
 const Room = () => {
-  const { id } = useParams();
+  const { roomId } = useParams();
   const userId = Date.now().toString();
   const username = "Shahzaib Khan";
+  const appID = 846351004;
+  const serverSecret = "02fc6c52cba41536f7cf28a722f1808e";
 
   const meeting = async (element) => {
-    try {
-      const appId = 846351004;
-      const serverSecret = "02fc6c52cba41536f7cf28a722f1808e";
-      const kitToken = ZegoUIKitPrebuilt.generateKitTokenForTest(
-        appId,
-        serverSecret,
-        id,
-        userId,
-        username
-      );
-      const zc = ZegoUIKitPrebuilt.create(kitToken);
+    const kitToken = ZegoUIKitPrebuilt.generateKitTokenForTest(
+      appID,
+      serverSecret,
+      roomId,
+      userId,
+      username
+    );
 
-      zc.joinRoom({
-        container: document.getElementById("call-container"),
+    const zc = ZegoUIKitPrebuilt.create(kitToken);
 
-        scenario: {
-          mode: ZegoUIKitPrebuilt.OneONoneCall,
+    zc.joinRoom({
+      container: document.getElementById("call-container"),
+
+      sharedLinks: [
+        {
+          name: "Copy Link",
+          url:
+            window.location.protocol +
+            "//" +
+            window.location.host +
+            window.location.pathname,
         },
-      });
-    } catch (error) {
-      console.log(error);
-    }
-  };
+      ],
 
+      scenario: {
+        mode: ZegoUIKitPrebuilt.OneONoneCall,
+      },
+    });
+  };
   return (
     <div
       className="myCallContainer"

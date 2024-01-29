@@ -160,7 +160,11 @@ function App() {
 
         <Route
           path="/room/:id"
-          element={<Room isAuthenticated={isAuthenticated} user={user}></Room>}
+          element={
+            <ProtectedRoute isAuthenticated={isAuthenticated} redirect="/login">
+              <Room></Room>
+            </ProtectedRoute>
+          }
         ></Route>
 
         <Route

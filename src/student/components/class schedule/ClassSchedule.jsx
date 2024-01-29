@@ -18,9 +18,10 @@ const ClassSchedule = ({ user, isAuthenticated }) => {
           <div className="col1-row">
             <Schedule
               image=""
-              teacher="Shahzaib Khan"
+              teacher="Abbas Khan"
               designation="Developer"
               course_name="Test Course"
+              link="/room/locus"
             ></Schedule>
           </div>
 
@@ -31,6 +32,7 @@ const ClassSchedule = ({ user, isAuthenticated }) => {
               teacher="Shahzaib Khan"
               designation="Developer"
               course_name="Test Course"
+              link="/room/locus"
             ></Schedule>
           </div>
         </div>
