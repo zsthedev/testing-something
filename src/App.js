@@ -45,6 +45,7 @@ import Error404 from "./landing/components/Error404";
 import Sidebar from "./admin/Sidebar/Sidebar";
 import Class from "./admin/Class/Class";
 import CreateClass from "./admin/Class/CreateClass";
+import Room from "./room/Room";
 
 function App() {
   const { isAuthenticated, user, message, error, loading } = useSelector(
@@ -155,6 +156,11 @@ function App() {
               ></ClassSchedule>
             </ProtectedRoute>
           }
+        ></Route>
+
+        <Route
+          path="/room/:id"
+          element={<Room isAuthenticated={isAuthenticated} user={user}></Room>}
         ></Route>
 
         <Route

@@ -50,7 +50,7 @@ const Navbar = ({ isAuthenticated, user }) => {
       >
         <div className="logo-row">
           <img src={logo} className="logo" alt="" />
-          <p>My Learning Portal</p>
+          <p>Family Portal</p>
         </div>
         <ul className="">
           <li>{/* <Link to="/profile">Profile</Link> */}</li>
