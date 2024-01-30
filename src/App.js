@@ -161,8 +161,14 @@ function App() {
         <Route
           path="/room/:roomId"
           element={
-            <ProtectedRoute isAuthenticated={isAuthenticated} redirect="/login">
-              <Room></Room>
+            <ProtectedRoute
+              isAuthenticated={
+                (isAuthenticated && user?.role === "student") ||
+                user?.role === "teacher"
+              }
+              redirect="/login"
+            >
+              <Room user={user} isAuthenticated={isAuthenticated}></Room>
             </ProtectedRoute>
           }
         ></Route>
@@ -203,7 +209,7 @@ function App() {
           path="student/performancereport"
           element={
             <ProtectedRoute
-              isAuthenticated={isAuthenticated && user.role === "student"}
+              isAuthenticated={isAuthenticated && user?.role === "student"}
               redirect="/profile"
             >
               <PerfromanceReport
@@ -218,7 +224,7 @@ function App() {
           path="student/feerecord"
           element={
             <ProtectedRoute
-              isAuthenticated={isAuthenticated && user.role === "student"}
+              isAuthenticated={isAuthenticated && user?.role === "student"}
               redirect="/profile"
             >
               <FeeRecord
@@ -236,7 +242,7 @@ function App() {
           path="t/salaryrecords"
           element={
             <ProtectedRoute
-              isAuthenticated={isAuthenticated && user.role === "teacher"}
+              isAuthenticated={isAuthenticated && user?.role === "teacher"}
               redirect="/profile"
             >
               <SalaryRecord
@@ -283,7 +289,7 @@ function App() {
           path="/finance"
           element={
             <ProtectedRoute
-              isAuthenticated={isAuthenticated && user.role === "finance"}
+              isAuthenticated={isAuthenticated && user?.role === "finance"}
               redirect="/login"
             >
               <SalaryGeneration
@@ -298,7 +304,7 @@ function App() {
           path="/f/feerecord"
           element={
             <ProtectedRoute
-              isAuthenticated={isAuthenticated && user.role === "finance"}
+              isAuthenticated={isAuthenticated && user?.role === "finance"}
               redirect="/profile"
             >
               <FinanceFeeRecord
@@ -313,7 +319,7 @@ function App() {
           path="/f/incomerecord"
           element={
             <ProtectedRoute
-              isAuthenticated={isAuthenticated && user.role === "finance"}
+              isAuthenticated={isAuthenticated && user?.role === "finance"}
               redirect="/profile"
             >
               <IncomeRecord
@@ -328,7 +334,7 @@ function App() {
           path="/f/expenserecord"
           element={
             <ProtectedRoute
-              isAuthenticated={isAuthenticated && user.role === "finance"}
+              isAuthenticated={isAuthenticated && user?.role === "finance"}
               redirect="/profile"
             >
               <ExpenseRecord
@@ -343,7 +349,7 @@ function App() {
           path="/f/companyassets"
           element={
             <ProtectedRoute
-              isAuthenticated={isAuthenticated && user.role === "finance"}
+              isAuthenticated={isAuthenticated && user?.role === "finance"}
               redirect="/profile"
             >
               <CompanyAssets
@@ -358,7 +364,7 @@ function App() {
           path="/f/invoices"
           element={
             <ProtectedRoute
-              isAuthenticated={isAuthenticated && user.role === "finance"}
+              isAuthenticated={isAuthenticated && user?.role === "finance"}
               redirect="/profile"
             >
               <SendInvoice
@@ -372,7 +378,7 @@ function App() {
           path="/f/createinvoice"
           element={
             <ProtectedRoute
-              isAuthenticated={isAuthenticated && user.role === "finance"}
+              isAuthenticated={isAuthenticated && user?.role === "finance"}
               redirect="/profile"
             >
               <CreateInvoice
@@ -390,7 +396,7 @@ function App() {
           path="/qc"
           element={
             <ProtectedRoute
-              isAuthenticated={isAuthenticated && user.role === "qc"}
+              isAuthenticated={isAuthenticated && user?.role === "qc"}
               redirect="/profile"
             >
               <QStudents
@@ -404,7 +410,7 @@ function App() {
           path="/qc/teachers"
           element={
             <ProtectedRoute
-              isAuthenticated={isAuthenticated && user.role === "qc"}
+              isAuthenticated={isAuthenticated && user?.role === "qc"}
               redirect="/profile"
             >
               <QTeachers
@@ -418,7 +424,7 @@ function App() {
           path="/qc/issuecertificates"
           element={
             <ProtectedRoute
-              isAuthenticated={isAuthenticated && user.role === "qc"}
+              isAuthenticated={isAuthenticated && user?.role === "qc"}
               redirect="/profile"
             >
               <IssueCertificate
@@ -451,7 +457,7 @@ function App() {
           path="/hr/issueletters"
           element={
             <ProtectedRoute
-              isAuthenticated={isAuthenticated && user.role === "hr"}
+              isAuthenticated={isAuthenticated && user?.role === "hr"}
               redirect="/profile"
             >
               <IssueLetters
@@ -507,7 +513,11 @@ function App() {
               adminRoute={true}
               redirectAdmin="/profile"
             >
-              <Sidebar items={adminSidebarItems} component={Class}></Sidebar>
+              <Sidebar
+                items={adminSidebarItems}
+                user={user}
+                component={Class}
+              ></Sidebar>
             </ProtectedRoute>
           }
         ></Route>

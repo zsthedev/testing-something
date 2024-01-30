@@ -13,7 +13,7 @@ const Navbar = ({ isAuthenticated, user }) => {
 
   const pathname = useLocation().pathname;
 
-  console.log(pathname);
+  console.log(pathname.split("/")[1]);
 
   const image = user && user.avatar.url;
 
@@ -51,7 +51,7 @@ const Navbar = ({ isAuthenticated, user }) => {
         className={
           isAuthenticated === true &&
           user.role === "student" &&
-          pathname != "/room/locus"
+          pathname.split("/")[1] != "room"
             ? "show"
             : "hide"
         }

@@ -1,6 +1,6 @@
 @import "../../../app.scss";
 
-.schedule{
+.schedule {
     width: 100%;
     height: 100px;
     background-color: white;
@@ -12,7 +12,19 @@
     border-radius: 0.3vw;
     box-shadow: rgba(149, 157, 165, 0.116) 0px 8px 24px;
 
-    img{
+    span {
+        font-size: 14px;
+        font-weight: 500;
+        color: $accent-color;
+        margin-bottom: 4px;
+    }
+
+    .student-admin {
+        display: flex;
+        flex-direction: column;
+    }
+
+    img {
         width: 4vw;
         height: 4vw;
         background-color: $accent-color;
@@ -21,15 +33,20 @@
         object-position: center;
     }
 
-
-    a{
+    a {
         color: $dark-color;
         font-size: 18px;
     }
 
-    a:hover{
+    a:hover {
         color: $accent-color;
         font-weight: 600;
         transition: 0.32s ease-in;
     }
+}
+
+.user-details {
+    display: flex;
+    gap: 20px;
+    align-items: center;
 }

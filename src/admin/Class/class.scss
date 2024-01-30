@@ -27,3 +27,19 @@
         height: 100vh;
     }
 }
+.schedule-row {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+#create-class {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    > button {
+        margin-top: 10px;
+        @include primaryBtn();
+        background-color: $accent-color;
+        color: white;
+    }
+}

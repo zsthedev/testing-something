@@ -1,10 +1,14 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./sidebar.scss";
 import { Link } from "react-router-dom";
 import logo from "../assets/logo.png";
+import { useDispatch } from "react-redux";
+import { getAllClasses } from "../../redux/actions/class";
 
-const Sidebar = ({ items, component: Component }) => {
+const Sidebar = ({ items, component: Component, user }) => {
   const [open, isOpen] = useState("");
+  const dispatch = useDispatch();
+
   return (
     <section id="admin-sidebar">
       <div className="row">
@@ -31,7 +35,7 @@ const Sidebar = ({ items, component: Component }) => {
             ))}
           </ul>
         </div>
-        <div className="col1">{Component && <Component />}</div>
+        <div className="col1">{Component && <Component user={user} />}</div>
       </div>
     </section>
   );
