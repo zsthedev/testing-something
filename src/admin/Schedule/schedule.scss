@@ -1,0 +1,102 @@
+@import "../../app.scss";
+
+#schedule {
+    width: 100%;
+    min-height: 100vh;
+    padding: 50px;
+    flex-direction: column;
+    align-items: flex-start;
+
+    > h2 {
+        color: $dark-color;
+    }
+
+    > .btn-row {
+        width: 100%;
+        display: flex;
+        justify-content: flex-end;
+        margin: 20px 0;
+
+        > a {
+            @include primaryBtn();
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: $accent-color;
+            color: white;
+            width: 150px;
+            height: 45px;
+        }
+    }
+
+    .row {
+        margin-top: 10px;
+        width: 100%;
+        height: 100vh;
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+    }
+}
+
+#s {
+    width: 100%;
+    background-color: white;
+    height: 60px;
+    align-items: center;
+    padding: 30px;
+    border-radius: 3px;
+    display: flex;
+    justify-content: space-between;
+}
+
+#schedule-details {
+    width: 100%;
+    min-height: 100%;
+    display: flex;
+    flex-direction: column;
+    padding: 50px;
+    > .row {
+        > h2 {
+            color: $dark-color;
+        }
+
+        > .btn-row {
+            width: 100%;
+            display: flex;
+            justify-content: flex-end;
+            > a {
+                @include primaryBtn();
+                @include flexCenter();
+                width: 150px;
+                height: 50px;
+                color: white;
+                text-align: center;
+                background-color: $accent-color;
+            }
+        }
+        width: 100%;
+        gap: 25px;
+        display: flex;
+        flex-direction: column;
+    }
+}
+
+#create-schedule {
+    width: 100%;
+    height: 100vh;
+    padding: 50px;
+
+    > h2 {
+        color: $dark-color;
+        margin-bottom: 15px;
+    }
+
+    > .row > form {
+        button {
+            @include primaryBtn();
+            background-color: $accent-color;
+            color: white;
+        }
+    }
+}

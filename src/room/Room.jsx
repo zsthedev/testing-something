@@ -3,13 +3,13 @@ import { useNavigate, useParams } from "react-router-dom";
 import { ZegoUIKitPrebuilt } from "@zegocloud/zego-uikit-prebuilt";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { markAttendance } from "../redux/actions/class";
+import { changeClassStatus, markAttendance } from "../redux/actions/schedule";
 import toast from "react-hot-toast";
 
 const Room = ({ isAuthenticated, user }) => {
   const { roomId } = useParams();
-
-  const { message, error } = useSelector((state) => state.classes);
+  console.log(roomId);
+  const { message, error } = useSelector((state) => state.schedule);
 
   useEffect(() => {
     if (message) {
@@ -48,10 +48,18 @@ const Room = ({ isAuthenticated, user }) => {
       container: document.getElementById("call-container"),
 
       onLeaveRoom: () => {
+        dispatch(changeClassStatus(roomId));
         navigate("/classchedule");
       },
       onJoinRoom: () => {
-        dispatch(markAttendance(roomId, userId, status, Date.now()));
+        const currentTime = new Date();
+        const formattedTime = currentTime.toLocaleTimeString([], {
+          hour: "2-digit",
+          minute: "2-digit",
+        });
+        dispatch(
+          markAttendance(roomId, userId, status, formattedTime, Date.now())
+        );
       },
 
       sharedLinks: [

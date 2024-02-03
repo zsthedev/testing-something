@@ -1,12 +1,12 @@
 import { server } from "../store";
 import axios from "axios";
 
-export const getMyClasses = () => async (dispatch) => {
+export const getMySchedule = () => async (dispatch) => {
   try {
-    dispatch({ type: "getClassesRequest" });
+    dispatch({ type: "getScheduleRequest" });
 
     const { data } = await axios.get(
-      `${server}/myclasses`,
+      `${server}/myschedule`,
 
       {
         headers: {
@@ -17,10 +17,10 @@ export const getMyClasses = () => async (dispatch) => {
       }
     );
     console.log(data);
-    dispatch({ type: "getClassesSuccess", payload: data });
+    dispatch({ type: "getScheduleSuccess", payload: data });
   } catch (error) {
     dispatch({
-      type: "getClassesFail",
+      type: "getScheduleFail",
       payload: error.response.data.message || "",
     });
   }
@@ -75,3 +75,28 @@ export const markAttendance =
       });
     }
   };
+
+export const changeClassStatus = (id) => async (dispatch) => {
+  try {
+    dispatch({ type: "changeClassStatusRequest" });
+
+    const { data } = await axios.put(
+      `${server}/changeclassstatus/${id}`,
+
+      {
+        headers: {
+          "Content-Type": "application/json",
+        },
+
+        withCredentials: true,
+      }
+    );
+    console.log(data);
+    dispatch({ type: "changeClassStatusSuccess", payload: data });
+  } catch (error) {
+    dispatch({
+      type: "changeClassStatusFail",
+      payload: error.response.data.message || "",
+    });
+  }
+};

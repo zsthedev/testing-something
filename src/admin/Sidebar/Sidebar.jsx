@@ -3,7 +3,7 @@ import "./sidebar.scss";
 import { Link } from "react-router-dom";
 import logo from "../assets/logo.png";
 import { useDispatch } from "react-redux";
-import { getAllClasses } from "../../redux/actions/class";
+import { getAllClasses } from "../../redux/actions/schedule";
 
 const Sidebar = ({ items, component: Component, user }) => {
   const [open, isOpen] = useState("");

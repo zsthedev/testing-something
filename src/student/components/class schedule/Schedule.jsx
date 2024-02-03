@@ -22,7 +22,9 @@ const Schedule = (props) => {
         />
 
         <div>
-          <span>Teacher Name</span>
+          <span>
+            {props.role === "teacher" ? "Student Name" : "Teacehr Name"}
+          </span>
           <h4>
             {props.role === "student"
               ? props.teacher.teacherName
@@ -46,15 +48,15 @@ const Schedule = (props) => {
       </div>
 
       <div>
-        <span>Start Time</span>
-        <h4>{props.start_time || "Start Time"}</h4>
+        <span>Class Timing</span>
+        <h4>{props.start_time}</h4>
       </div>
       <div>
         <span>Duration</span>
         <h4>{props.duration + " Minutes" || "Start Time"}</h4>
       </div>
       <div>
-        <span>Lesson</span>
+        <span>Course Title</span>
         <h4>{props.course_name || "Course Name"}</h4>
       </div>
 

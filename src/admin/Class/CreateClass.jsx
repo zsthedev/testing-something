@@ -4,29 +4,29 @@ import Select from "react-select";
 import toast from "react-hot-toast";
 import { getAllStudents } from "../../redux/actions/finance";
 import {
+  addClass,
   createClass,
   getAllAdminStudents,
   getAllTeachers,
 } from "../../redux/actions/admin";
 import Loader from "../../Loader";
 
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
 const CreateClass = () => {
-  const students = useSelector((state) => state.admin?.students);
   const teachers = useSelector((state) => state.admin?.teachers);
+  const schedule = useSelector((state) => state.admin?.schedule);
   const dispatch = useDispatch();
   const { loading, message, error } = useSelector((state) => state.admin);
 
   const navigate = useNavigate();
   useEffect(() => {
-    dispatch(getAllAdminStudents());
     dispatch(getAllTeachers());
 
     if (message) {
       toast.success(message);
       dispatch({ type: "clearMessage" });
-      navigate("/admin/classes");
+      navigate("/admin/schedule");
     }
     if (error) {
       toast.error(error);
@@ -36,15 +36,12 @@ const CreateClass = () => {
 
   const [title, setTitle] = useState("");
   const [teacher, setTeacher] = useState("");
-  const [student, setStudent] = useState("");
-  const [duration, setDuration] = useState("");
+  const [date, setDate] = useState("");
   const [startTime, setStartTime] = useState("");
+  const [endTime, setEndTime] = useState("");
   const [lesson, setLesson] = useState("");
-
-  const studentsOption = students?.map((c) => ({
-    value: c._id,
-    label: c.name,
-  }));
+  const params = useParams();
+  const { id } = params;
 
   const teacherOptions = teachers?.map((c) => ({
     value: c._id,
@@ -55,7 +52,15 @@ const CreateClass = () => {
     e.preventDefault();
 
     dispatch(
-      createClass(title, student.value, teacher.value, duration, startTime)
+      addClass(
+        date,
+        title,
+        teacher.value,
+        schedule.studentId,
+        id,
+        startTime,
+        endTime
+      )
     );
   };
 
@@ -66,14 +71,24 @@ const CreateClass = () => {
       <div className="row">
         <h2>Create Class</h2>
         <form onSubmit={submitHandler} action="" id="create-class">
+          <label htmlFor="date">Date</label>
+          <input
+            type="date"
+            id="date"
+            value={date}
+            onChange={(e) => setDate(e.target.value)}
+          />
+          <label htmlFor="title">Title</label>
           <input
             type="text"
             placeholder="Title"
+            id="title"
             value={title}
             onChange={(e) => setTitle(e.target.value)}
           />
-
+          <label htmlFor="teacher">Select Teacher</label>
           <Select
+            id="teacher"
             styles={{
               control: (baseStyles, state) => ({
                 ...baseStyles,
@@ -87,29 +102,25 @@ const CreateClass = () => {
             defaultValue={teacher}
             onChange={setTeacher}
           ></Select>
-          <Select
-            styles={{
-              control: (baseStyles, state) => ({
-                ...baseStyles,
-                backgroundColor: "rgba(4, 127, 106, 0.192)",
-                padding: "5px",
-                border: "none",
-              }),
-            }}
-            options={studentsOption}
-            placeholder="Choose Student"
-            defaultValue={student}
-            onChange={setStudent}
-          ></Select>
-
+          <label htmlFor="start">Start Time</label>
           <input
-            type="text"
-            placeholder="Duration"
-            value={duration}
-            onChange={(e) => setDuration(e.target.value)}
+            id="start"
+            type="time"
+            placeholder="Start Time"
+            value={startTime}
+            onChange={(e) => setStartTime(e.target.value)}
           />
-
+          <label htmlFor="end">End Time</label>
+          <input
+            id="end"
+            type="time"
+            placeholder="Start Time"
+            value={endTime}
+            onChange={(e) => setEndTime(e.target.value)}
+          />
+          <label htmlFor="lesson">Title</label>
           <Select
+            id="lesson"
             styles={{
               control: (baseStyles, state) => ({
                 ...baseStyles,
@@ -122,13 +133,6 @@ const CreateClass = () => {
             defaultValue={lesson}
             onChange={setLesson}
           ></Select>
-          <input
-            type="datetime-local"
-            placeholder="Duration"
-            value={startTime}
-            onChange={(e) => setStartTime(e.target.value)}
-          />
-
           <button>Create</button>
         </form>
       </div>

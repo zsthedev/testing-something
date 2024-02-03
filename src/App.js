@@ -46,6 +46,9 @@ import Sidebar from "./admin/Sidebar/Sidebar";
 import Class from "./admin/Class/Class";
 import CreateClass from "./admin/Class/CreateClass";
 import Room from "./room/Room";
+import Schedule from "./admin/Schedule/Schedule";
+import ScheduleDetails from "./admin/Schedule/ScheduleDetails";
+import CreateSchedule from "./admin/Schedule/CreateSchedule";
 
 function App() {
   const { isAuthenticated, user, message, error, loading } = useSelector(
@@ -72,7 +75,7 @@ function App() {
 
   const adminSidebarItems = [
     {
-      value: [{ link: "/admin/classes", title: "Classes" }],
+      value: [{ link: "/admin/schedule", title: "Schedules" }],
       label: "Students",
     },
   ];
@@ -176,10 +179,7 @@ function App() {
         <Route
           path="/attendancehistory"
           element={
-            <ProtectedRoute
-              isAuthenticated={isAuthenticated}
-              redirect="/profile"
-            >
+            <ProtectedRoute isAuthenticated={isAuthenticated} redirect="/login">
               <AttendanceHistory
                 isAuthenticated={isAuthenticated}
                 user={user}
@@ -195,7 +195,7 @@ function App() {
           element={
             <ProtectedRoute
               isAuthenticated={isAuthenticated && user?.role === "student"}
-              redirect="/profile"
+              redirect="/login"
             >
               <ExamHistory
                 isAuthenticated={isAuthenticated}
@@ -210,7 +210,7 @@ function App() {
           element={
             <ProtectedRoute
               isAuthenticated={isAuthenticated && user?.role === "student"}
-              redirect="/profile"
+              redirect="/login"
             >
               <PerfromanceReport
                 isAuthenticated={isAuthenticated}
@@ -225,7 +225,7 @@ function App() {
           element={
             <ProtectedRoute
               isAuthenticated={isAuthenticated && user?.role === "student"}
-              redirect="/profile"
+              redirect="/login"
             >
               <FeeRecord
                 isAuthenticated={isAuthenticated}
@@ -243,7 +243,7 @@ function App() {
           element={
             <ProtectedRoute
               isAuthenticated={isAuthenticated && user?.role === "teacher"}
-              redirect="/profile"
+              redirect="/login"
             >
               <SalaryRecord
                 isAuthenticated={isAuthenticated}
@@ -258,7 +258,7 @@ function App() {
           element={
             <ProtectedRoute
               isAuthenticated={isAuthenticated && user.role === "teacher"}
-              redirect="/profile"
+              redirect="/login"
             >
               <Students
                 isAuthenticated={isAuthenticated}
@@ -272,7 +272,7 @@ function App() {
           element={
             <ProtectedRoute
               isAuthenticated={isAuthenticated && user.role === "teacher"}
-              redirect="/profile"
+              redirect="/login"
             >
               <TeacherPerformance
                 isAuthenticated={isAuthenticated}
@@ -305,7 +305,7 @@ function App() {
           element={
             <ProtectedRoute
               isAuthenticated={isAuthenticated && user?.role === "finance"}
-              redirect="/profile"
+              redirect="/login"
             >
               <FinanceFeeRecord
                 isAuthenticated={isAuthenticated}
@@ -320,7 +320,7 @@ function App() {
           element={
             <ProtectedRoute
               isAuthenticated={isAuthenticated && user?.role === "finance"}
-              redirect="/profile"
+              redirect="/login"
             >
               <IncomeRecord
                 isAuthenticated={isAuthenticated}
@@ -335,7 +335,7 @@ function App() {
           element={
             <ProtectedRoute
               isAuthenticated={isAuthenticated && user?.role === "finance"}
-              redirect="/profile"
+              redirect="/login"
             >
               <ExpenseRecord
                 isAuthenticated={isAuthenticated}
@@ -350,7 +350,7 @@ function App() {
           element={
             <ProtectedRoute
               isAuthenticated={isAuthenticated && user?.role === "finance"}
-              redirect="/profile"
+              redirect="/login"
             >
               <CompanyAssets
                 isAuthenticated={isAuthenticated}
@@ -365,7 +365,7 @@ function App() {
           element={
             <ProtectedRoute
               isAuthenticated={isAuthenticated && user?.role === "finance"}
-              redirect="/profile"
+              redirect="/login"
             >
               <SendInvoice
                 isAuthenticated={isAuthenticated}
@@ -379,7 +379,7 @@ function App() {
           element={
             <ProtectedRoute
               isAuthenticated={isAuthenticated && user?.role === "finance"}
-              redirect="/profile"
+              redirect="/login"
             >
               <CreateInvoice
                 isAuthenticated={isAuthenticated}
@@ -397,7 +397,7 @@ function App() {
           element={
             <ProtectedRoute
               isAuthenticated={isAuthenticated && user?.role === "qc"}
-              redirect="/profile"
+              redirect="/login"
             >
               <QStudents
                 isAuthenticated={isAuthenticated}
@@ -411,7 +411,7 @@ function App() {
           element={
             <ProtectedRoute
               isAuthenticated={isAuthenticated && user?.role === "qc"}
-              redirect="/profile"
+              redirect="/login"
             >
               <QTeachers
                 isAuthenticated={isAuthenticated}
@@ -425,7 +425,7 @@ function App() {
           element={
             <ProtectedRoute
               isAuthenticated={isAuthenticated && user?.role === "qc"}
-              redirect="/profile"
+              redirect="/login"
             >
               <IssueCertificate
                 isAuthenticated={isAuthenticated}
@@ -444,7 +444,7 @@ function App() {
           element={
             <ProtectedRoute
               isAuthenticated={isAuthenticated && user.role === "hr"}
-              redirect="/profile"
+              redirect="/login"
             >
               <HTeachers
                 isAuthenticated={isAuthenticated}
@@ -458,7 +458,7 @@ function App() {
           element={
             <ProtectedRoute
               isAuthenticated={isAuthenticated && user?.role === "hr"}
-              redirect="/profile"
+              redirect="/login"
             >
               <IssueLetters
                 isAuthenticated={isAuthenticated}
@@ -473,7 +473,7 @@ function App() {
           element={
             <ProtectedRoute
               isAuthenticated={isAuthenticated && user.role === "hr"}
-              redirect="/profile"
+              redirect="/login"
             >
               <TeacherTraining
                 isAuthenticated={isAuthenticated}
@@ -494,7 +494,7 @@ function App() {
               isAuthenticated={isAuthenticated}
               isAdmin={user && user.role === "admin"}
               adminRoute={true}
-              redirectAdmin="/profile"
+              redirectAdmin="/login"
             >
               <Sidebar
                 items={adminSidebarItems}
@@ -511,7 +511,7 @@ function App() {
               isAuthenticated={isAuthenticated}
               isAdmin={user && user.role === "admin"}
               adminRoute={true}
-              redirectAdmin="/profile"
+              redirectAdmin="/login"
             >
               <Sidebar
                 items={adminSidebarItems}
@@ -523,13 +523,67 @@ function App() {
         ></Route>
 
         <Route
-          path="/admin/classes/create"
+          path="/admin/schedule"
           element={
             <ProtectedRoute
               isAuthenticated={isAuthenticated}
               isAdmin={user && user.role === "admin"}
               adminRoute={true}
-              redirectAdmin="/profile"
+              redirectAdmin="/login"
+            >
+              <Sidebar
+                items={adminSidebarItems}
+                user={user}
+                component={Schedule}
+              ></Sidebar>
+            </ProtectedRoute>
+          }
+        ></Route>
+
+        <Route
+          path="/admin/schedule/:id"
+          element={
+            <ProtectedRoute
+              isAuthenticated={isAuthenticated}
+              isAdmin={user && user.role === "admin"}
+              adminRoute={true}
+              redirectAdmin="/login"
+            >
+              <Sidebar
+                items={adminSidebarItems}
+                user={user}
+                component={ScheduleDetails}
+              ></Sidebar>
+            </ProtectedRoute>
+          }
+        ></Route>
+
+        <Route
+          path="/admin/createschedule"
+          element={
+            <ProtectedRoute
+              isAuthenticated={isAuthenticated}
+              isAdmin={user && user.role === "admin"}
+              adminRoute={true}
+              redirectAdmin="/login"
+            >
+              <Sidebar
+                items={adminSidebarItems}
+                user={user}
+                component={CreateSchedule}
+              ></Sidebar>
+            </ProtectedRoute>
+          }
+        ></Route>
+
+        <Route
+          path="/admin/schedule/:id/createclass"
+          element={
+            <ProtectedRoute
+              isAuthenticated={isAuthenticated}
+              isAdmin={user && user.role === "admin"}
+              adminRoute={true}
+              redirectAdmin="/login"
             >
               <Sidebar
                 items={adminSidebarItems}

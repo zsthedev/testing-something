@@ -7,14 +7,16 @@ import "react-calendar/dist/Calendar.css";
 import "./attendence.scss";
 import Attendance from "./Attendance";
 import Absent from "./Absent";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { loadUser } from "../../../redux/actions/user";
 
 const ClassSchedule = ({ user, isAuthenticated }) => {
   const role = user.role;
   const [date, setDate] = useState(new Date());
+  const schedule = useSelector((state) => state.schedule?.schedule);
+  const toatlClasses = schedule[0].classes.length;
 
-  const toatlClasses = user.classHistory.length;
+  console.log(toatlClasses);
   const attendanceClasses = user.attendanceHistory.filter(
     (h) => h.status === "present"
   ).length;
@@ -30,10 +32,7 @@ const ClassSchedule = ({ user, isAuthenticated }) => {
         <div className="col1">
           <h2>Current Month</h2>
           <div className="col1-row" id="attendance-row">
-            <Attendance
-              text="Total Classes"
-              number={user.classHistory.length}
-            />
+            <Attendance text="Total Classes" number={toatlClasses} />
             <Attendance
               text="Current Attendence"
               number={

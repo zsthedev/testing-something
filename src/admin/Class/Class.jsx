@@ -3,7 +3,7 @@ import "./class.scss";
 import Schedule from "../../student/components/class schedule/Schedule";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { getAllClasses } from "../../redux/actions/class";
+import { getAllClasses } from "../../redux/actions/schedule";
 import Loader from "../../Loader";
 
 const Class = ({ user }) => {

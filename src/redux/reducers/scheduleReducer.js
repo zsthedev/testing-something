@@ -1,16 +1,16 @@
 import { createReducer } from "@reduxjs/toolkit";
 
-export const classReducer = createReducer(
+export const scheduleReducer = createReducer(
   {},
   {
-    getClassesRequest: (state) => {
+    getScheduleRequest: (state) => {
       state.loading = true;
     },
-    getClassesSuccess: (state, action) => {
+    getScheduleSuccess: (state, action) => {
       state.loading = false;
-      state.classess = action.payload;
+      state.schedule = action.payload.mySchedule;
     },
-    getClassesFail: (state, action) => {
+    getScheduleFail: (state, action) => {
       state.loading = false;
       state.error = action.payload;
     },
@@ -38,6 +38,22 @@ export const classReducer = createReducer(
     },
 
     markAttendanceFail: (state, action) => {
+      state.loading = false;
+
+      state.error = action.payload;
+    },
+
+    changeClassStatusRequest: (state) => {
+      state.loading = true;
+    },
+
+    changeClassStatusSuccess: (state, action) => {
+      state.loading = false;
+
+      state.message = action.payload.message;
+    },
+
+    changeClassStatusUpdate: (state, action) => {
       state.loading = false;
 
       state.error = action.payload;

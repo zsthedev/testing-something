@@ -77,3 +77,106 @@ export const createClass =
       });
     }
   };
+
+export const getAllSchedules = () => async (dispatch) => {
+  try {
+    dispatch({ type: "getAllSchedulesRequest" });
+
+    const { data } = await axios.get(
+      `${server}/schedules`,
+
+      {
+        headers: {
+          "Content-Type": "application/json",
+        },
+
+        withCredentials: true,
+      }
+    );
+    console.log(data);
+    dispatch({ type: "getAllSchedulesSuccess", payload: data });
+  } catch (error) {
+    dispatch({
+      type: "getAllSchedulesFail",
+      payload: error.response.data.message,
+    });
+  }
+};
+
+export const getSchedule = (id) => async (dispatch) => {
+  try {
+    dispatch({ type: "getScheduleRequest" });
+
+    const { data } = await axios.get(
+      `${server}/schedule/${id}`,
+
+      {
+        headers: {
+          "Content-Type": "application/json",
+        },
+
+        withCredentials: true,
+      }
+    );
+    console.log(data);
+    dispatch({ type: "getScheduleSuccess", payload: data });
+  } catch (error) {
+    dispatch({
+      type: "getScheduleFail",
+      payload: error.response.data.message,
+    });
+  }
+};
+
+export const createSchedule = (title, studentId, month) => async (dispatch) => {
+  try {
+    dispatch({ type: "createScheduleRequest" });
+
+    const { data } = await axios.post(
+      `${server}/createschedule`,
+      { title, studentId, month },
+
+      {
+        headers: {
+          "Content-Type": "application/json",
+        },
+
+        withCredentials: true,
+      }
+    );
+    console.log(data);
+    dispatch({ type: "createScheduleSuccess", payload: data });
+  } catch (error) {
+    dispatch({
+      type: "createScheduleFail",
+      payload: error.response.data.message,
+    });
+  }
+};
+export const addClass =
+  (date, title, teacherId, studentId, scheduleId, startTime, endTime) =>
+  async (dispatch) => {
+    try {
+      dispatch({ type: "addClassRequest" });
+
+      const { data } = await axios.post(
+        `${server}/addclass/${scheduleId}`,
+        { date, title, teacherId, studentId, startTime, endTime },
+
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+
+          withCredentials: true,
+        }
+      );
+      console.log(data);
+      dispatch({ type: "addClassSuccess", payload: data });
+    } catch (error) {
+      dispatch({
+        type: "addClassFail",
+        payload: error.response.data.message,
+      });
+    }
+  };

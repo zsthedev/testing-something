@@ -36,6 +36,13 @@
     display: flex;
     flex-direction: column;
     gap: 15px;
+
+    > label {
+        margin-bottom: 0;
+        font-size: 15px;
+        font-weight: 500;
+        color: $dark-color;
+    }
     > button {
         margin-top: 10px;
         @include primaryBtn();
