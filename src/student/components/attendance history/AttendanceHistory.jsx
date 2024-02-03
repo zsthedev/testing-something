@@ -14,9 +14,10 @@ const ClassSchedule = ({ user, isAuthenticated }) => {
   const role = user.role;
   const [date, setDate] = useState(new Date());
   const schedule = useSelector((state) => state.schedule?.schedule);
-  const toatlClasses = schedule[0].classes.length;
+  const toatlClasses = schedule[0]?.classes.length;
 
-  console.log(toatlClasses);
+  const attendance = user.attendanceHistory;
+
   const attendanceClasses = user.attendanceHistory.filter(
     (h) => h.status === "present"
   ).length;
@@ -40,18 +41,51 @@ const ClassSchedule = ({ user, isAuthenticated }) => {
                   .length
               }
             />
-            <Attendance text="Percentage" number={percentage} />
+            <Attendance
+              text="Absenties"
+              number={
+                user.attendanceHistory.filter((h) => h.status === "absent")
+                  .length
+              }
+            />
+
+            <Attendance
+              text="Percentage"
+              number={percentage === "NaN" ? "0" : percentage}
+            />
           </div>
 
-          <h2>Absency Report</h2>
+          <h2>Report</h2>
           <div className="col1-row" id="absence-row">
-            {absent && absent.length > 0 ? (
-              absent.map((a) => {
-                <Absent day="Saturday" date="6-December-2023"></Absent>;
-              })
-            ) : (
-              <p>No Absent Till Today</p>
-            )}
+            <table>
+              <tr>
+                <th>Date</th>
+                <th>Class Timing</th>
+                <th>Joining Time</th>
+                <th>Status</th>
+                <th>Review</th>
+              </tr>
+
+              {attendance && attendance.length > 0
+                ? attendance.map((a) => (
+                    <tr>
+                      <td>{new Date(Number(a.date)).toLocaleDateString()}</td>
+                      <td>
+                        {a.classTime.split(":")[0] > 12
+                          ? a.classTime + " P.M"
+                          : a.classTime + " A.M" || "Nill"}{" "}
+                      </td>
+                      <td>{a.status === "absent" ? "Nill" : a.joiningTime}</td>
+                      <td>{a.status}</td>
+                      <td>
+                        {a.status === "absent"
+                          ? "Student Was Absent"
+                          : a.joiningTime}
+                      </td>
+                    </tr>
+                  ))
+                : ""}
+            </table>
           </div>
         </div>
         <div className="col2">

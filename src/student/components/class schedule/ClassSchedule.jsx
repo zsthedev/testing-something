@@ -9,17 +9,56 @@ import "react-calendar/dist/Calendar.css";
 
 import { useDispatch, useSelector } from "react-redux";
 import toast from "react-hot-toast";
-import { getMySchedule } from "../../../redux/actions/schedule";
+import {
+  changeClassStatus,
+  getMySchedule,
+  markAttendance,
+} from "../../../redux/actions/schedule";
 
 const ClassSchedule = ({ user, isAuthenticated }) => {
   const role = user.role;
   const [date, setDate] = useState(new Date());
 
   const dispatch = useDispatch();
+  const schedule = useSelector((state) => state.schedule?.schedule);
 
+  const classes = schedule
+    ? schedule[0]?.classes.filter((s) => s.status === "Not Taken")
+    : [];
   useEffect(() => {
     dispatch(getMySchedule());
   }, []);
+
+  useEffect(() => {
+    const markAttendanceForEndedClasses = () => {
+      if (classes && classes.length > 0) {
+        const currentDate = new Date();
+
+        classes.forEach((c) => {
+          const classDateTime = new Date(`${c.date}T${c.endTime}`);
+
+          if (currentDate >= classDateTime && c.status === "Not Taken") {
+            dispatch(
+              markAttendance(
+                c._id,
+                user._id,
+                "absent",
+                currentDate.toLocaleTimeString([], {
+                  hour: "2-digit",
+                  minute: "2-digit",
+                }),
+
+                c.startTime,
+                Date.now()
+              )
+            );
+          }
+        });
+      }
+    };
+
+    markAttendanceForEndedClasses();
+  }, [classes, dispatch]);
   const navigate = useNavigate();
   const clickHandler = (e) => {
     navigate(`/room/${e.target.id}`);
@@ -33,18 +72,12 @@ const ClassSchedule = ({ user, isAuthenticated }) => {
     return currentTime >= startTime && currentTime <= endTime;
   };
 
-  const schedule = useSelector((state) => state.schedule?.schedule);
-
-  const classes = schedule
-    ? schedule[0]?.classes.filter((s) => s.status === "Not Taken")
-    : [];
-
   console.log(classes);
   return (
     <section className="profile schedule-section">
       <div className="row">
         <div className="col1">
-          <h2>{schedule ? schedule[0].month : ""} Schedule</h2>
+          <h2>{schedule ? schedule[0]?.month : ""} Schedule</h2>
           <div className="col1-row">
             <table>
               <tr>

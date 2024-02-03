@@ -51,30 +51,33 @@ export const getAllClasses = () => async (dispatch) => {
   }
 };
 export const markAttendance =
-  (classId, userId, status, date) => async (dispatch) => {
-    try {
-      dispatch({ type: "markAttendanceRequest" });
+  // classId, status, joiningTime, classTime, date
 
-      const { data } = await axios.post(
-        `${server}/mark-attendance`,
-        { classId, userId, status, date },
-        {
-          headers: {
-            "Content-Type": "application/json",
-          },
+    (classId, userId, status, joiningTime, classTime, date) =>
+    async (dispatch) => {
+      try {
+        dispatch({ type: "markAttendanceRequest" });
 
-          withCredentials: true,
-        }
-      );
-      console.log(data);
-      dispatch({ type: "markAttendanceSuccess", payload: data });
-    } catch (error) {
-      dispatch({
-        type: "markAttendanceFail",
-        payload: error.response.data.message,
-      });
-    }
-  };
+        const { data } = await axios.post(
+          `${server}/mark-attendance`,
+          { classId, userId, status, joiningTime, classTime, date },
+          {
+            headers: {
+              "Content-Type": "application/json",
+            },
+
+            withCredentials: true,
+          }
+        );
+        console.log(data);
+        dispatch({ type: "markAttendanceSuccess", payload: data });
+      } catch (error) {
+        dispatch({
+          type: "markAttendanceFail",
+          payload: error.response.data.message,
+        });
+      }
+    };
 
 export const changeClassStatus = (id) => async (dispatch) => {
   try {

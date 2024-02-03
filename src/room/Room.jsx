@@ -5,10 +5,19 @@ import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { changeClassStatus, markAttendance } from "../redux/actions/schedule";
 import toast from "react-hot-toast";
+import { loadUser } from "../redux/actions/user";
 
 const Room = ({ isAuthenticated, user }) => {
   const { roomId } = useParams();
-  console.log(roomId);
+  const schedule = useSelector((state) => state.schedule?.schedule);
+  const classes =
+    schedule.map((c) =>
+      c.classes.filter((c) => c._id.toString() === roomId.toString())
+    ) || [];
+
+  const startTime = classes[0][0].startTime;
+
+  console.log(classes);
   const { message, error } = useSelector((state) => state.schedule);
 
   useEffect(() => {
@@ -48,7 +57,7 @@ const Room = ({ isAuthenticated, user }) => {
       container: document.getElementById("call-container"),
 
       onLeaveRoom: () => {
-        dispatch(changeClassStatus(roomId));
+        dispatch(loadUser());
         navigate("/classchedule");
       },
       onJoinRoom: () => {
@@ -58,7 +67,15 @@ const Room = ({ isAuthenticated, user }) => {
           minute: "2-digit",
         });
         dispatch(
-          markAttendance(roomId, userId, status, formattedTime, Date.now())
+          markAttendance(
+            roomId,
+            userId,
+            status,
+            formattedTime,
+            startTime,
+
+            Date.now()
+          )
         );
       },
 

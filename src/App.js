@@ -135,10 +135,7 @@ function App() {
           path="/profile"
           element={
             <ProtectedRoute
-              isAuthenticated={
-                (isAuthenticated && user?.role === "teacher") ||
-                user?.role === "student"
-              }
+              isAuthenticated={isAuthenticated && user?.role === "teacher"}
               redirect="/login"
             >
               <Profile isAuthenticated={isAuthenticated} user={user}></Profile>
