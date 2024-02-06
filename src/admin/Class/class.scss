@@ -50,3 +50,47 @@
         color: white;
     }
 }
+
+#update_class {
+    width: 100%;
+    min-height: 100vh;
+    padding: 50px;
+
+    > h2 {
+        color: $dark-color;
+    }
+
+    > .row {
+        margin-top: 20px;
+    }
+}
+
+#class-details {
+    padding: 50px;
+    width: 100%;
+    min-height: 100vh;
+
+    > h2 {
+        color: $dark-color;
+        font-size: 20px;
+        margin-bottom: 10px;
+    }
+
+    > .details {
+        margin-bottom: 10px;
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+
+        > p {
+            font-size: 16px;
+            font-weight: 500;
+            > span {
+                font-size: 16px;
+                font-weight: 650;
+                color: $accent-color;
+                margin-right: 5px;
+            }
+        }
+    }
+}

@@ -53,6 +53,7 @@ export const getAllClasses = () => async (dispatch) => {
 export const markAttendance =
   // classId, status, joiningTime, classTime, date
 
+
     (classId, userId, status, joiningTime, classTime, date) =>
     async (dispatch) => {
       try {
@@ -99,6 +100,31 @@ export const changeClassStatus = (id) => async (dispatch) => {
   } catch (error) {
     dispatch({
       type: "changeClassStatusFail",
+      payload: error.response.data.message || "",
+    });
+  }
+};
+
+export const getAllUsers = () => async (dispatch) => {
+  try {
+    dispatch({ type: "allUsersRequest" });
+
+    const { data } = await axios.get(
+      `${server}/allusers`,
+
+      {
+        headers: {
+          "Content-Type": "application/json",
+        },
+
+        withCredentials: true,
+      }
+    );
+    console.log(data);
+    dispatch({ type: "allUsersSuccess", payload: data });
+  } catch (error) {
+    dispatch({
+      type: "allUsersFail",
       payload: error.response.data.message || "",
     });
   }

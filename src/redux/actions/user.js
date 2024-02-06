@@ -72,3 +72,29 @@ export const logout = () => async (dispatch) => {
     });
   }
 };
+
+export const sendContactQuery = (to, from, message) => async (dispatch) => {
+  try {
+    dispatch({ type: "sendContactQueryRequest" });
+
+    const { data } = await axios.post(
+      `${server}/sendcontact`,
+      { to, from, message },
+
+      {
+        headers: {
+          "Content-Type": "application/json",
+        },
+
+        withCredentials: true,
+      }
+    );
+    console.log(data);
+    dispatch({ type: "sendContactQuerySuccess", payload: data });
+  } catch (error) {
+    dispatch({
+      type: "sendContactQueryFail",
+      payload: error.response.data.message || "",
+    });
+  }
+};

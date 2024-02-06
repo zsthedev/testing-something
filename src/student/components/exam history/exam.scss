@@ -1,0 +1,35 @@
+@import "../../../app.scss";
+
+#exam {
+    width: 100%;
+    min-height: 100vh;
+    padding: 150px 50px;
+
+    > form {
+        > .question {
+            .statement {
+                font-size: 20px;
+                font-weight: 600;
+                margin-bottom: 10px;
+            }
+
+            > .options {
+                width: 200px;
+
+                > .option-row {
+                    display: flex;
+                    align-items: center;
+                    margin: 10px 0;
+                    gap: 5px;
+
+                    > input {
+                        width: 25px;
+                    }
+                    > label {
+                        font-size: 16px;
+                    }
+                }
+            }
+        }
+    }
+}

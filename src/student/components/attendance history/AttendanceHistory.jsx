@@ -14,7 +14,7 @@ const ClassSchedule = ({ user, isAuthenticated }) => {
   const role = user.role;
   const [date, setDate] = useState(new Date());
   const schedule = useSelector((state) => state.schedule?.schedule);
-  const toatlClasses = schedule[0]?.classes.length;
+  const toatlClasses = schedule && schedule[0]?.classes.length;
 
   const attendance = user.attendanceHistory;
 

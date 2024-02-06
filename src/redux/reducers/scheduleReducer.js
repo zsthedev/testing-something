@@ -59,6 +59,20 @@ export const scheduleReducer = createReducer(
       state.error = action.payload;
     },
 
+    allUsersRequest: (state) => {
+      state.loading = true;
+    },
+
+    allUsersSuccess: (state, action) => {
+      state.loading = false;
+      state.allusers = action.payload.users;
+    },
+
+    allUsersFail: (state, action) => {
+      state.loading = false;
+      state.error = action.payload;
+    },
+
     clearError: (state) => {
       state.error = null;
     },

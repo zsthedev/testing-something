@@ -49,6 +49,13 @@ import Room from "./room/Room";
 import Schedule from "./admin/Schedule/Schedule";
 import ScheduleDetails from "./admin/Schedule/ScheduleDetails";
 import CreateSchedule from "./admin/Schedule/CreateSchedule";
+import UpdateClass from "./admin/Class/UpdateClass";
+import ClassDetails from "./admin/Class/ClassDetails";
+import Exam from "./student/components/exam history/Exam";
+import AdminExams from "./admin/Exams/AdminExams";
+import UpdateExams from "./admin/Exams/UpdateExams";
+import ExamDetails from "./admin/Exams/ExamDetails";
+import CreateExam from "./admin/Exams/CreateExam";
 
 function App() {
   const { isAuthenticated, user, message, error, loading } = useSelector(
@@ -75,7 +82,10 @@ function App() {
 
   const adminSidebarItems = [
     {
-      value: [{ link: "/admin/schedule", title: "Schedules" }],
+      value: [
+        { link: "/admin/schedule", title: "Schedules" },
+        { link: "/admin/exams", title: "Exams" },
+      ],
       label: "Students",
     },
   ];
@@ -198,6 +208,18 @@ function App() {
                 isAuthenticated={isAuthenticated}
                 user={user}
               ></ExamHistory>
+            </ProtectedRoute>
+          }
+        ></Route>
+
+        <Route
+          path="student/exam/:id"
+          element={
+            <ProtectedRoute
+              isAuthenticated={isAuthenticated && user?.role === "student"}
+              redirect="/login"
+            >
+              <Exam isAuthenticated={isAuthenticated} user={user}></Exam>
             </ProtectedRoute>
           }
         ></Route>
@@ -585,6 +607,108 @@ function App() {
               <Sidebar
                 items={adminSidebarItems}
                 component={CreateClass}
+              ></Sidebar>
+            </ProtectedRoute>
+          }
+        ></Route>
+
+        <Route
+          path="/admin/schedule/:id/c/:cid"
+          element={
+            <ProtectedRoute
+              isAuthenticated={isAuthenticated}
+              isAdmin={user && user.role === "admin"}
+              adminRoute={true}
+              redirectAdmin="/login"
+            >
+              <Sidebar
+                items={adminSidebarItems}
+                component={UpdateClass}
+              ></Sidebar>
+            </ProtectedRoute>
+          }
+        ></Route>
+
+        <Route
+          path="/admin/s/:id/c/:cid"
+          element={
+            <ProtectedRoute
+              isAuthenticated={isAuthenticated}
+              isAdmin={user && user.role === "admin"}
+              adminRoute={true}
+              redirectAdmin="/login"
+            >
+              <Sidebar
+                items={adminSidebarItems}
+                component={ClassDetails}
+              ></Sidebar>
+            </ProtectedRoute>
+          }
+        ></Route>
+
+        <Route
+          path="/admin/exams"
+          element={
+            <ProtectedRoute
+              isAuthenticated={isAuthenticated}
+              isAdmin={user && user.role === "admin"}
+              adminRoute={true}
+              redirectAdmin="/login"
+            >
+              <Sidebar
+                items={adminSidebarItems}
+                component={AdminExams}
+              ></Sidebar>
+            </ProtectedRoute>
+          }
+        ></Route>
+
+        <Route
+          path="/admin/exam/u/:id"
+          element={
+            <ProtectedRoute
+              isAuthenticated={isAuthenticated}
+              isAdmin={user && user.role === "admin"}
+              adminRoute={true}
+              redirectAdmin="/login"
+            >
+              <Sidebar
+                items={adminSidebarItems}
+                component={UpdateExams}
+              ></Sidebar>
+            </ProtectedRoute>
+          }
+        ></Route>
+
+        <Route
+          path="/admin/exam/d/:id"
+          element={
+            <ProtectedRoute
+              isAuthenticated={isAuthenticated}
+              isAdmin={user && user.role === "admin"}
+              adminRoute={true}
+              redirectAdmin="/login"
+            >
+              <Sidebar
+                items={adminSidebarItems}
+                component={ExamDetails}
+              ></Sidebar>
+            </ProtectedRoute>
+          }
+        ></Route>
+
+        <Route
+          path="/admin/createxam"
+          element={
+            <ProtectedRoute
+              isAuthenticated={isAuthenticated}
+              isAdmin={user && user.role === "admin"}
+              adminRoute={true}
+              redirectAdmin="/login"
+            >
+              <Sidebar
+                items={adminSidebarItems}
+                component={CreateExam}
               ></Sidebar>
             </ProtectedRoute>
           }

@@ -47,9 +47,9 @@ const ScheduleDetails = ({ user }) => {
                   <td>{c.endTime}</td>
                   <td>{c.duration} Minutes</td>
                   <td>{c.status}</td>
-                  <td>
-                    <button>Update</button>
-                    <button>Details</button>
+                  <td id="links-row">
+                    <Link to={`/admin/schedule/${id}/c/${c._id}`}>Update</Link>
+                    <Link to={`/admin/s/${id}/c/${c._id}`}>Details</Link>
                   </td>
                 </tr>
               ))

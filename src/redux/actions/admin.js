@@ -180,3 +180,40 @@ export const addClass =
       });
     }
   };
+
+export const updateClass =
+  (
+    date,
+    title,
+    teacherId,
+    studentId,
+    scheduleId,
+    classId,
+    startTime,
+    endTime
+  ) =>
+  async (dispatch) => {
+    try {
+      dispatch({ type: "updateClassRequest" });
+
+      const { data } = await axios.put(
+        `${server}/updateclass/s/${scheduleId}/c/${classId}`,
+        { date, title, teacherId, studentId, startTime, endTime },
+
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+
+          withCredentials: true,
+        }
+      );
+      console.log(data);
+      dispatch({ type: "updateClassSuccess", payload: data });
+    } catch (error) {
+      dispatch({
+        type: "updateClassFail",
+        payload: error.response.data.message,
+      });
+    }
+  };

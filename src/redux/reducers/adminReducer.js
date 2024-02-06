@@ -87,6 +87,18 @@ export const adminReducer = createReducer(
       state.error = action.payload;
     },
 
+    updateClassRequest: (state) => {
+      state.loading = true;
+    },
+    updateClassSuccess: (state, action) => {
+      state.loading = false;
+      state.message = action.payload.message;
+    },
+    updateClassFail: (state, action) => {
+      state.loading = false;
+      state.error = action.payload;
+    },
+
     clearError: (state) => {
       state.error = null;
     },

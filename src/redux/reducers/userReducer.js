@@ -52,6 +52,20 @@ export const userReducer = createReducer(
       state.error = action.payload;
     },
 
+    sendContactQueryRequest: (state) => {
+      state.loading = true;
+    },
+
+    sendContactQuerySuccess: (state, action) => {
+      state.loading = false;
+      state.message = action.payload.message;
+    },
+
+    sendContactQueryFail: (state, action) => {
+      state.loading = false;
+      state.error = action.payload;
+    },
+
     clearError: (state) => {
       state.error = null;
     },

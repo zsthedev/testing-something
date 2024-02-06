@@ -19,18 +19,29 @@ const Schedule = () => {
         <Link to={"/admin/createschedule"}>Create New</Link>
       </div>
       <div className="row">
-        {schedule && schedule.length > 0 ? (
-          schedule.map((s) => (
-            <S
-              title={s.title}
-              name={s.name}
-              month={s.month}
-              link={`/admin/schedule/${s._id}`}
-            ></S>
-          ))
-        ) : (
-          <p>No Schedule</p>
-        )}
+        <table>
+          <tr>
+            <th>Title</th>
+            <th>Month</th>
+            <th>Student</th>
+            <th>Action</th>
+          </tr>
+
+          {schedule && schedule.length > 0 ? (
+            schedule.map((s) => (
+              <tr>
+                <td>{s.title}</td>
+                <td>{s.month}</td>
+                <td>{s.studentName}</td>
+                <td id="link">
+                  <Link to={`/admin/schedule/${s._id}`}>Visit</Link>
+                </td>
+              </tr>
+            ))
+          ) : (
+            <p>No Schedule</p>
+          )}
+        </table>
       </div>
     </section>
   );

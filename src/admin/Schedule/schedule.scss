@@ -100,3 +100,30 @@
         }
     }
 }
+
+#links-row {
+    display: flex;
+    gap: 10px;
+    > a:nth-child(1) {
+        background-color: $accent-color;
+        color: white;
+        padding: 5px 10px;
+        border-radius: 2px;
+    }
+
+    > a:nth-child(2) {
+        background-color: $dark-color;
+        color: white;
+        padding: 5px 10px;
+        border-radius: 2px;
+    }
+}
+
+#link {
+    > a {
+        padding: 4px 10px;
+        background-color: $accent-color;
+        color: white;
+        border-radius: 2px;
+    }
+}

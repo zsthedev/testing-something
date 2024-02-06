@@ -14,6 +14,7 @@ import {
   getMySchedule,
   markAttendance,
 } from "../../../redux/actions/schedule";
+import { getAllExams } from "../../../redux/actions/exam";
 
 const ClassSchedule = ({ user, isAuthenticated }) => {
   const role = user.role;
@@ -59,6 +60,10 @@ const ClassSchedule = ({ user, isAuthenticated }) => {
 
     markAttendanceForEndedClasses();
   }, [classes, dispatch]);
+
+  useEffect(() => {
+    dispatch(getAllExams());
+  }, []);
   const navigate = useNavigate();
   const clickHandler = (e) => {
     navigate(`/room/${e.target.id}`);
@@ -127,8 +132,34 @@ const ClassSchedule = ({ user, isAuthenticated }) => {
             </table>
           </div>
 
-          <h2>Upcoming Classes</h2>
-          <div className="col1-row"></div>
+          <h2>Exams</h2>
+          <div className="col1-row">
+            <table>
+              <thead>
+                <tr>
+                  <th>Title</th>
+
+                  <th>Due Date</th>
+                  <th>Questions</th>
+                  <th>Total Marks</th>
+                  <th>Status</th>
+                  <th>Action</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Qaida Course</td>
+                  <td>10-Feb-2023</td>
+                  <td>05</td>
+                  <td>10</td>
+                  <td>Not Taken</td>
+                  <td>
+                    <Link to={"/student/exam/123"}>Join</Link>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
         </div>
         <div className="col2">
           <div>
