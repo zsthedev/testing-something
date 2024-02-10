@@ -1,21 +1,17 @@
 @import "../../app.scss";
 
-
 .salary-section {
-    h2{
+    h2 {
         color: $dark-color;
     }
 
-    .salary-row{
+    .salary-row {
         margin-top: 30px;
         display: flex;
         flex-direction: column;
-
-
-
     }
 
-    #salary{
+    #salary {
         width: 100%;
         display: flex;
         justify-content: space-between;
@@ -26,4 +22,13 @@
         border-radius: 5px;
         box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
     }
+}
+
+#pdf {
+    padding: 5px 10px;
+    background-color: $accent-color;
+    color: white;
+    border: none;
+    outline: none;
+    border-radius: 2px;
 }

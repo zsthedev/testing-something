@@ -42,3 +42,91 @@
         color: white;
     }
 }
+
+#create-exam {
+    padding: 50px;
+
+    > h2 {
+        color: $dark-color;
+        margin-bottom: 20px;
+    }
+
+    > form {
+        label {
+            font-size: 14px;
+            font-weight: 500;
+            margin-bottom: 5px;
+            color: $dark-color;
+        }
+
+        > .question {
+            margin-top: 10px;
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            label {
+                font-size: 14px;
+                font-weight: 500;
+                margin-bottom: 5px;
+                color: $dark-color;
+            }
+
+            > .options-row {
+                display: flex;
+                justify-content: space-between;
+
+                > div {
+                    > label {
+                        margin-bottom: 10px;
+                    }
+                }
+            }
+        }
+    }
+}
+
+#create-question-button {
+    background-color: $accent-color;
+    border: none;
+    outline: none;
+    padding: 10px 20px;
+    color: white;
+    border-radius: 3px;
+    margin-top: 10px;
+    cursor: pointer;
+}
+
+#remove-question-button {
+    background-color: $dark-color;
+    border: none;
+    outline: none;
+    padding: 10px 20px;
+    color: white;
+    border-radius: 3px;
+    margin-top: 10px;
+    cursor: pointer;
+}
+
+#exam-details {
+    width: 100%;
+    min-height: 100vh;
+    padding: 50px;
+
+    > h2 {
+        color: $dark-color;
+        margin-bottom: 15px;
+    }
+
+    button {
+        background-color: $accent-color;
+        border: none;
+        outline: none;
+        color: white;
+        padding: 8px 15px;
+        border-radius: 2px;
+        cursor: pointer;
+    }
+}

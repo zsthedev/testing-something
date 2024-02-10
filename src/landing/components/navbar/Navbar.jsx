@@ -76,6 +76,10 @@ const Navbar = ({ isAuthenticated, user }) => {
           </li>
 
           <li>
+            <Link to="">Lesson History</Link>
+          </li>
+
+          <li>
             <Link to="student/performancereport">Performance Report</Link>
           </li>
           <li>

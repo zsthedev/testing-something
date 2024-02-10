@@ -27,7 +27,28 @@ const FinanceFeeRecord = () => {
           <div className="col1-content">
             <div className="fee-r-row">
               <h2>Fee Record</h2>
-              <Fee></Fee>
+
+              <table>
+                <tr>
+                  <th>Student Name</th>
+                  <th>Course Title</th>
+                  <th>Due Date</th>
+                  <th>Fee</th>
+                  <th>Status</th>
+                  <th>Actions</th>
+                </tr>
+
+                <tr>
+                  <td>Abbas Khan</td>
+                  <td>Tajweed</td>
+                  <td>15-Feb-2024</td>
+                  <td>5000</td>
+                  <td>Not Paid</td>
+                  <td>
+                    <button>Reminder</button>
+                  </td>
+                </tr>
+              </table>
             </div>
           </div>
         </div>

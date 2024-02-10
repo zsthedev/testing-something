@@ -14,14 +14,18 @@ const ClassSchedule = ({ user, isAuthenticated }) => {
   const role = user.role;
   const [date, setDate] = useState(new Date());
   const schedule = useSelector((state) => state.schedule?.schedule);
-  const toatlClasses = schedule && schedule[0]?.classes.length;
+  const toatlClasses =
+    user.role === "student"
+      ? schedule && schedule[0]?.classes.length
+      : schedule && schedule.length;
 
   const attendance = user.attendanceHistory;
 
   const attendanceClasses = user.attendanceHistory.filter(
     (h) => h.status === "present"
   ).length;
-  const percentage = (attendanceClasses / toatlClasses) * 100 + "%";
+  const percentage =
+    ((attendanceClasses / toatlClasses) * 100).toFixed(1) + "%";
 
   const absent = user.attendanceHistory.filter(
     (h) => h.status === "absent"
@@ -78,8 +82,10 @@ const ClassSchedule = ({ user, isAuthenticated }) => {
                       <td>{a.status === "absent" ? "Nill" : a.joiningTime}</td>
                       <td>{a.status}</td>
                       <td>
-                        {a.status === "absent"
+                        {a.status === "absent" && user.role === "student"
                           ? "Student Was Absent"
+                          : a.status === "absent" && user.role === "teacher"
+                          ? "Teacher Was Absent"
                           : a.joiningTime}
                       </td>
                     </tr>

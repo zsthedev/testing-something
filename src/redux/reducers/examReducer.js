@@ -35,7 +35,7 @@ export const examReducer = createReducer(
     },
     attemptExamFail: (state, action) => {
       state.loading = false;
-      state.message = action.payload;
+      state.error = action.payload;
     },
 
     declareResultRequest: (state) => {

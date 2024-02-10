@@ -22,10 +22,25 @@ const ClassSchedule = ({ user, isAuthenticated }) => {
 
   const dispatch = useDispatch();
   const schedule = useSelector((state) => state.schedule?.schedule);
+  console.log(schedule);
 
-  const classes = schedule
-    ? schedule[0]?.classes.filter((s) => s.status === "Not Taken")
-    : [];
+  let classes;
+  if (user.role === "student") {
+    classes =
+      schedule && schedule.length > 0
+        ? schedule[0]?.classes.filter((s) => s.status === "Not Taken")
+        : [];
+  }
+
+  if (user.role === "teacher") {
+    classes =
+      schedule && schedule.length > 0
+        ? schedule.filter((s) => s.status === "Not Taken")
+        : [];
+  }
+
+  console.log(classes);
+
   useEffect(() => {
     dispatch(getMySchedule());
   }, []);
@@ -64,10 +79,27 @@ const ClassSchedule = ({ user, isAuthenticated }) => {
   useEffect(() => {
     dispatch(getAllExams());
   }, []);
+
   const navigate = useNavigate();
   const clickHandler = (e) => {
     navigate(`/room/${e.target.id}`);
   };
+
+  const allExams = useSelector((state) => state.exam?.exams);
+
+  const exams =
+    allExams &&
+    allExams.filter((exam) => {
+      if (Array.isArray(exam.studentsAttempted)) {
+        const studentExists = exam.studentsAttempted.some(
+          (attempt) => attempt.studentId === user._id
+        );
+
+        return !studentExists;
+      }
+
+      return true;
+    });
 
   const isJoinable = (startTime, endTime) => {
     const currentTime = new Date().toLocaleTimeString([], {
@@ -77,7 +109,6 @@ const ClassSchedule = ({ user, isAuthenticated }) => {
     return currentTime >= startTime && currentTime <= endTime;
   };
 
-  console.log(classes);
   return (
     <section className="profile schedule-section">
       <div className="row">
@@ -93,6 +124,8 @@ const ClassSchedule = ({ user, isAuthenticated }) => {
                 <th>Teacher</th>
                 <th>Start Time</th>
                 <th>End Time</th>
+                <th>Class Type</th>
+                <th>Class Level</th>
                 <th>Duration</th>
                 <th>Status</th>
                 <th>Actions</th>
@@ -108,6 +141,8 @@ const ClassSchedule = ({ user, isAuthenticated }) => {
                       <td>{c.teacher.teacherName}</td>
                       <td>{c.startTime}</td>
                       <td>{c.endTime}</td>
+                      <td>Regular</td>
+                      <td>Beginner</td>
                       <td>{c.duration} Minutes</td>
                       <td>{c.status}</td>
                       <td>
@@ -132,8 +167,8 @@ const ClassSchedule = ({ user, isAuthenticated }) => {
             </table>
           </div>
 
-          <h2>Exams</h2>
-          <div className="col1-row">
+          <div className={role === "teacher" ? "hide" : "col1-row"}>
+            <h2>Exams</h2>
             <table>
               <thead>
                 <tr>
@@ -147,16 +182,20 @@ const ClassSchedule = ({ user, isAuthenticated }) => {
                 </tr>
               </thead>
               <tbody>
-                <tr>
-                  <td>Qaida Course</td>
-                  <td>10-Feb-2023</td>
-                  <td>05</td>
-                  <td>10</td>
-                  <td>Not Taken</td>
-                  <td>
-                    <Link to={"/student/exam/123"}>Join</Link>
-                  </td>
-                </tr>
+                {exams && exams.length > 0
+                  ? exams.map((e, index) => (
+                      <tr key={index}>
+                        <td>{e.title}</td>
+                        <td>{e.duedate}</td>
+                        <td>{e.questions.length}</td>
+                        <td>{e.totalMarks}</td>
+                        <td>{e.status}</td>
+                        <td>
+                          <Link to={`/student/exam/${e._id}`}>Attemp</Link>
+                        </td>
+                      </tr>
+                    ))
+                  : ""}
               </tbody>
             </table>
           </div>

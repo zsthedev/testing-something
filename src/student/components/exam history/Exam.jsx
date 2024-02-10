@@ -1,53 +1,92 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./exam.scss";
+import { useNavigate, useParams } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import toast from "react-hot-toast";
+import { attemptExam } from "../../../redux/actions/exam";
+import Loader from "../../../Loader";
 
-const Exam = () => {
-  const questions = [
-    {
-      id: 1,
-      statement: "How many letters in Haroof-e-Tahajee",
-      options: ["HTML", "JavaScript", "React", "CSS"],
-    },
-    {
-      id: 2,
-      statement: "What is the capital of France?",
-      options: ["Paris", "London", "Berlin", "Madrid"],
-    },
-  ];
+const Exam = ({ user }) => {
+  const params = useParams();
 
-  const [answers, setAnswers] = useState({});
+  const { id } = params;
+  const exams = useSelector((state) => state.exam?.exams);
+
+  const exam = exams.find((e) => e._id.toString() === id);
+
+  const questions = exam.questions;
+
+  const [answers, setAnswers] = useState([]);
+
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const { message, error, loading } = useSelector((state) => state.exam);
+  useEffect(() => {
+    if (message) {
+      toast.success(message);
+      dispatch({ type: "clearMessage" });
+      navigate("/classchedule");
+    }
+
+    if (error) {
+      toast.error(error);
+      dispatch({ type: "clearError" });
+    }
+  }, [error, message]);
 
   const handleOptionChange = (questionId, option) => {
-    setAnswers((prevAnswers) => ({
-      ...prevAnswers,
-      [questionId]: option,
-    }));
+    const existingAnswerIndex = answers.findIndex(
+      (answer) => answer.id === questionId
+    );
+
+    if (existingAnswerIndex !== -1) {
+      setAnswers((prevAnswers) => {
+        const updatedAnswers = [...prevAnswers];
+        updatedAnswers[existingAnswerIndex] = {
+          id: questionId,
+          answer: option,
+        };
+        return updatedAnswers;
+      });
+    } else {
+      setAnswers((prevAnswers) => [
+        ...prevAnswers,
+        { id: questionId, answer: option },
+      ]);
+    }
   };
 
   const submitHandler = (e) => {
     e.preventDefault();
+    const studentId = user._id;
+    const examId = id;
 
-    console.log("Answers:", answers);
+    dispatch(attemptExam(studentId, examId, answers));
   };
 
-  return (
+  return loading ? (
+    <Loader />
+  ) : (
     <div id="exam">
       <form onSubmit={submitHandler} action="">
         {questions.map((question) => (
-          <div key={question.id} className="question">
+          <div key={question._id} className="question">
             <p className="statement">{question.statement}</p>
             <div className="options">
               {question.options.map((option, index) => (
                 <div key={index} className="option-row">
                   <input
                     type="radio"
-                    id={`option-${question.id}-${index}`}
-                    name={`question-${question.id}`}
+                    id={`option-${question._id}-${index}`}
+                    name={`question-${question._id}`}
                     value={option}
-                    checked={answers[question.id] === option}
-                    onChange={() => handleOptionChange(question.id, option)}
+                    checked={answers.some(
+                      (answer) =>
+                        answer.id === question._id && answer.answer === option
+                    )}
+                    onChange={() => handleOptionChange(question._id, option)}
                   />
-                  <label htmlFor={`option-${question.id}-${index}`}>
+                  <label htmlFor={`option-${question._id}-${index}`}>
                     {option}
                   </label>
                 </div>

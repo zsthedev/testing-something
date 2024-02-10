@@ -26,37 +26,40 @@ export const getAllExams = () => async (dispatch) => {
   }
 };
 
-export const createExam = () => async (dispatch) => {
-  try {
-    dispatch({ type: "createExamRequest" });
+export const createExam =
+  (title, duedate, totalmarks, questions) => async (dispatch) => {
+    try {
+      dispatch({ type: "createExamRequest" });
 
-    const { data } = await axios.get(
-      `${server}/admin/createxam`,
+      const { data } = await axios.post(
+        `${server}/admin/createxam`,
+        { title, duedate, totalmarks, questions },
 
-      {
-        headers: {
-          "Content-Type": "application/json",
-        },
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
 
-        withCredentials: true,
-      }
-    );
-    console.log(data);
-    dispatch({ type: "createExamSuccess", payload: data });
-  } catch (error) {
-    dispatch({
-      type: "createExamFail",
-      payload: error.response.data.message,
-    });
-  }
-};
+          withCredentials: true,
+        }
+      );
+      console.log(data);
+      dispatch({ type: "createExamSuccess", payload: data });
+    } catch (error) {
+      dispatch({
+        type: "createExamFail",
+        payload: error.response.data.message,
+      });
+    }
+  };
 
-export const attemptExam = () => async (dispatch) => {
+export const attemptExam = (studentId, examId, answers) => async (dispatch) => {
   try {
     dispatch({ type: "attemptExamRequest" });
 
-    const { data } = await axios.get(
-      `${server}/admin/attemptexam`,
+    const { data } = await axios.post(
+      `${server}/attemptexam`,
+      { studentId, examId, answers },
 
       {
         headers: {
@@ -76,12 +79,13 @@ export const attemptExam = () => async (dispatch) => {
   }
 };
 
-export const declareResult = () => async (dispatch) => {
+export const declareResult = (studentId, examId) => async (dispatch) => {
   try {
     dispatch({ type: "declareResultRequest" });
 
-    const { data } = await axios.get(
+    const { data } = await axios.post(
       `${server}/admin/declareresult`,
+      { studentId, examId },
 
       {
         headers: {
